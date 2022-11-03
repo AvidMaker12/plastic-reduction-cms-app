@@ -63,13 +63,12 @@
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Settings') }}
-                                        
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-
+                                    
                                     <!-- Logout Dropdown Link: -->
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -95,7 +94,7 @@
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> <!-- Alert message close button. -->
                 <div class="alert-success alert-dissmissable fade in"><?= session()->get('message') ?></div>
             </div>
-         @endif
+        @endif
 
         <div class="card-body">
             @if (session('status'))
