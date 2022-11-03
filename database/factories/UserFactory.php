@@ -20,6 +20,7 @@ class UserFactory extends Factory
         return [
             'f_name' => fake()->firstName(),
             'l_name' => fake()->lastName(),
+            'username' => fake()->userName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             // 'password' => 'password',
