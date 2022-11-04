@@ -1,6 +1,6 @@
-@extends('layouts_console.app_console')
+@extends('layouts.app')
 
-@section('title') {{'Console'}} @endsection <!-- Dynamic page tab title. -->
+@section('title') {{'Home'}} @endsection <!-- Dynamic page tab title. -->
 
 @section('content')
     <div class="container">
@@ -22,7 +22,7 @@
                             <li><a href="/console/plastic-products/list">Plastic Products</a></li>
                             <li><a href="/console/questionnaire/list">Questionnaire</a></li>
                             <li><a href="/console/clients/list">User Accounts</a></li>
-                            <li><a href="{{route('admin.list')}}">Admin Accounts</a></li>
+                            <li><a href="/console/admins/list">Admin Accounts</a></li> <!-- NOTE: Rename routing from 'users' to 'admin'. -->
                         </ul>
                     </div>
                 </div>

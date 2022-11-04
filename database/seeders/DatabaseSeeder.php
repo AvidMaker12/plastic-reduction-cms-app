@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         // Empty tables upon 'migrate refresh' command to prevent continuously adding to seeded data. //
         User::truncate();
+        PlasticProduct::truncate(); // Table foreign keys connections: users
 
         
         // Seed data to tables. //
@@ -25,7 +26,7 @@ class DatabaseSeeder extends Seeder
         */
         
         User::factory()->count(4)->create();
-
+        PlasticProduct::factory()->count(4)->create(); // Table foreign keys connections: users
 
         
         // \App\Models\User::factory(10)->create();

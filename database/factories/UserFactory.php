@@ -18,6 +18,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
+            // Notes: No columns related to 'id', 'images', 'timestamps' are listed here.
             'f_name' => fake()->firstName(),
             'l_name' => fake()->lastName(),
             'username' => fake()->userName(),
