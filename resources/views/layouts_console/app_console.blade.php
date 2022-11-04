@@ -87,24 +87,6 @@
             </div>
         </nav>
 
-        <!-- Page status messages.
-             Example: "New Plastic Product has successfully been added." -->
-        @if(session()->has('message'))
-            <div class="card-body">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> <!-- Alert message close button. -->
-                <div class="alert-success alert-dissmissable fade in"><?= session()->get('message') ?></div>
-            </div>
-        @endif
-
-        <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-        </div>
-
-
         <main class="py-4">
             @yield('content')
         </main>

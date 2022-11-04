@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
@@ -24,7 +25,7 @@ class AdminController extends Controller
     public function addForm()
     {
 
-        return view('users.add');
+        return view('admins.add');
 
     }
     
@@ -42,18 +43,18 @@ class AdminController extends Controller
         $user->f_name = $attributes['f_name'];
         $user->l_name = $attributes['l_name'];
         $user->email = $attributes['email'];
-        $user->password = $attributes['password'];
+        $user->password = Hash::make($attributes['password']);
         $user->save();
 
-        return redirect('/console/users/list')
-            ->with('message', 'User has been added!');
+        return redirect('admins.list')
+            ->with('message', 'New Admin has been added.');
 
     }
 
     public function editForm(User $user)
     {
 
-        return view('users.edit', [
+        return view('admins.edit', [
             'user' => $user,
         ]);
 
@@ -77,12 +78,13 @@ class AdminController extends Controller
         $user->l_name = $attributes['l_name'];
         $user->email = $attributes['email'];
 
-        if($attributes['password']) $user->password = $attributes['password'];
+        if($attributes['password']) $user->password = Hash::make($attributes['password']);
+        // if($attributes['password']) $user->password = $attributes['password'];
 
         $user->save();
 
-        return redirect('/console/users/list')
-            ->with('message', 'User has been edited!');
+        return redirect(route('admin.list'))
+            ->with('message', 'Admin has been edited.');
 
     }
 
