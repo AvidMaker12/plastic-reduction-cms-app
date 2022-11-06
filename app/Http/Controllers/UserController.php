@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
-class AdminController extends Controller
+class UserController extends Controller
 {
     public function list()
     {      
-        return view('admins.list', [
+        return view('users.list', [
             'users' => User::all()
         ]); 
     }
@@ -26,35 +26,32 @@ class AdminController extends Controller
     public function addForm()
     {
 
-        return view('admins.add');
+        return view('users.add');
 
     }
     
     public function add()
     {
         $attributes = request()->validate([
-            'f_name' => 'required',
-            'l_name' => 'required',
+            'username' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
         ]);
 
         $user = new User();
-        $user->f_name = $attributes['f_name'];
-        $user->l_name = $attributes['l_name'];
+        $user->username = $attributes['username'];
         $user->email = $attributes['email'];
         $user->password = Hash::make($attributes['password']);
-        $user->is_admin = 1;
         $user->save();
 
-        return redirect(route('admin.list'))
-            ->with('message', 'New Admin has been added.');
+        return redirect('users.list')
+            ->with('message', 'New User has been added.');
     }
 
     public function editForm(User $user)
     {
 
-        return view('admins.edit', [
+        return view('users.edit', [
             'user' => $user,
         ]);
     }
@@ -63,8 +60,7 @@ class AdminController extends Controller
     {
 
         $attributes = request()->validate([
-            'f_name' => 'required',
-            'l_name' => 'required',
+            'username' => 'required',
             'email' => [
                 'required',
                 'email',
@@ -73,8 +69,7 @@ class AdminController extends Controller
             'password' => 'nullable',
         ]);
 
-        $user->f_name = $attributes['f_name'];
-        $user->l_name = $attributes['l_name'];
+        $user->username = $attributes['username'];
         $user->email = $attributes['email'];
 
         if($attributes['password']) $user->password = Hash::make($attributes['password']); // Password validation to prevent empty string.
@@ -82,30 +77,28 @@ class AdminController extends Controller
 
         $user->save();
 
-        return redirect(route('admin.list'))
-            ->with('message', 'Admin has been edited.');
-
+        return redirect(route('user.list'))
+            ->with('message', 'User has been edited.');
     }
 
     public function delete(User $user)
     {
 
-        if($user->id == auth()->user()->id)
-        {
-            return redirect(route('admin.list'))
-                ->with('message', 'Cannot delete your own admin account. Requires supervisor approval.');
-        }
+        // if($user->id == auth()->user()->id)
+        // {
+        //     return redirect('/console/users/list')
+        //         ->with('message', 'Cannot delete your own user account!');        
+        // }
         
         $user->delete();
 
-        return redirect(route('admin.list'))
-            ->with('message', 'Admin has been deleted.');                
-        
+        return redirect(route('user.list'))
+            ->with('message', 'User has been deleted!');                
     }
 
     public function imageForm(User $user)
     {
-        return view('admins.image', [
+        return view('users.image', [
             'user' => $user,
         ]);
     }
@@ -114,19 +107,17 @@ class AdminController extends Controller
     {
 
         $attributes = request()->validate([
-            // 'profile_image' => 'required|image',
-            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'profile_image' => 'required|image',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        if($user->profile_image){
-            Storage::delete($user->profile_image); // Delete previously stored image, if any.
-        }
-
-        $path = request()->file('profile_image')->store('users', 'public'); // Expected string output example: users/picture.jpg
-        $user->profile_image = $path; // Expected string output example to be stored into DB: http://127.0.0.1:8000/storage/users/picture.jpg
+        Storage::delete($user->profile_image); // Delete previously stored image, if any.
+        
+        $path = request()->file('profile_image')->store('users');
+        $user->profile_image = $path;
         $user->save();
         
-        return redirect(route('admin.list'))
-            ->with('message', 'Admin profile picture has been edited.');
+        return redirect(route('user.list'))
+            ->with('message', 'User profile picture has been edited.');
     }
 }

@@ -14,6 +14,9 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"> <!-- Bootstrap Icons -->
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -86,6 +89,23 @@
                 </div>
             </div>
         </nav>
+
+        <!-- Page status messages.
+             Example: "Account has successfully been edited." -->
+             @if(session()->has('message'))
+             <div class="card-body">
+                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> <!-- Alert message close button. -->
+                 <div class="alert-success alert-dissmissable fade in"><?= session()->get('message') ?></div>
+             </div>
+          @endif
+ 
+         <div class="card-body">
+             @if (session('status'))
+                 <div class="alert alert-success" role="alert">
+                     {{ session('status') }}
+                 </div>
+             @endif
+         </div>
 
         <main class="py-4">
             @yield('content')

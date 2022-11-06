@@ -8,18 +8,17 @@
 
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">Edit Admin</h2>
-                <p class="card-text"><?= $user->f_name ?> <?= $user->l_name ?></p>
+                <h2 class="card-title">Add New Admin</h2>
             </div>
 
             <div class="card-body">
-                <form method="post" action="<?= route('admin.edit',[$user->id])?>" novalidate class="form-horizontal" enctype="multipart/form-data">
+                <form method="post" action="<?= route('admin.add')?>" novalidate class="form-horizontal" enctype="multipart/form-data">
 
                     <?= csrf_field() ?>
 
                     <div class="mb-4">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="text" name="email" id="email" value="<?= old('email', $user->email) ?>" required class="form-control">
+                        <input type="text" name="email" id="email" value="<?= old('email') ?>" required class="form-control">
                         <?php if($errors->first('email')): ?>
                             <br>
                             <span class="text-danger"><?= $errors->first('email'); ?></span>
@@ -38,7 +37,7 @@
 
                     <div class="mb-4">
                         <label for="f_name" class="form-label">First Name:</label>
-                        <input type="text" name="f_name" id="f_name" value="<?= old('f_name', $user->f_name) ?>" required class="form-control">
+                        <input type="text" name="f_name" id="f_name" value="<?= old('f_name') ?>" required class="form-control">
                         <?php if($errors->first('f_name')): ?>
                             <br>
                             <span class="text-danger"><?= $errors->first('f_name'); ?></span>
@@ -47,14 +46,14 @@
 
                     <div class="mb-4">
                         <label for="l_name" class="form-label">Last Name:</label>
-                        <input type="text" name="l_name" id="l_name" value="<?= old('l_name', $user->l_name) ?>" required class="form-control">
+                        <input type="text" name="l_name" id="l_name" value="<?= old('l_name') ?>" required class="form-control">
                         <?php if($errors->first('l_name')): ?>
                             <br>
                             <span class="text-danger"><?= $errors->first('l_name'); ?></span>
                         <?php endif; ?>
                     </div>
 
-                    <button type="submit" class="btn btn-success mb-3">Edit Admin</button>
+                    <button type="submit" class="btn btn-success mb-3">Add New Admin</button>
 
                 </form>
             </div>
