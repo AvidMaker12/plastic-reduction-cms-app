@@ -2,13 +2,13 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="modalDeleteTitle{{ $user->id }}" >{{ __('Delete User Confirmation') }}</h4>
+                <h4 class="modal-title" id="modalDeleteTitle{{ $user->id }}" >{{ __('Confirm Delete Admin') }}</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <!-- <span aria-hidden="true">&times;</span> -->
                 </button>
             </div>
             <div class="modal-body">
-                Permanently delete user <b>{{ $user->username }}</b>?
+                Permanently delete admin <b>{{ $user->f_name }} {{ $user->l_name }}</b> ?
             </div>
             <div class="modal-footer">
                 <a href="<?= route('user.delete',[$user->id]) ?>" class="btn btn-danger" data-be-dismiss="modal" role="button">Delete</a>

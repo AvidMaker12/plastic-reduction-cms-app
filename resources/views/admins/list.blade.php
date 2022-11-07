@@ -34,9 +34,13 @@
                             <td><?= $user->f_name ?> <?= $user->l_name ?></td>
                             <td><?= $user->email ?></td>
                             <td><?= $user->created_at->format('M j, Y, G:i') ?></td>
-                            <td><a href="<?= route('admin.image',[$user->id]) ?>" class="btn btn-primary" role="button">Profile Picture</a>
-                            <a href="<?= route('admin.edit',[$user->id]) ?>" class="btn btn-primary" role="button">Edit</a>
-                            <a href="<?= route('admin.delete',[$user->id]) ?>" class="btn btn-danger" role="button">Delete</a></td>
+                            <td>
+                                <a href="<?= route('admin.image',[$user->id]) ?>" class="btn btn-primary" role="button">Profile Picture</a>
+                                <a href="<?= route('admin.edit',[$user->id]) ?>" class="btn btn-primary" role="button">Edit</a>
+                                <!-- <a href="<?= route('admin.delete',[$user->id]) ?>" class="btn btn-danger" role="button">Delete</a> -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $user->id }}" >Delete</button>
+                            </td>
+                            @include('admins.modals.delete_modal')
                         </tr>
                     <?php endif; ?>
                 <?php endforeach; ?>

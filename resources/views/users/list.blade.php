@@ -42,7 +42,7 @@
                                 <!-- <a href="<?= route('user.delete',[$user->id]) ?>" class="btn btn-danger" role="button">Delete</a></td> -->
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $user->id }}" >Delete</button>
                             </td>
-                            @include('users.modal.delete_modal')
+                            @include('users.modals.delete_modal')
                         </tr>
                     <?php endif; ?>
                 <?php endforeach; ?>
