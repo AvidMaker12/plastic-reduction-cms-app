@@ -21,6 +21,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
+    <a href="top" class="visually-hidden" aria-hidden="true"></a> <!-- 'Back To Top' page link. -->
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -94,19 +95,13 @@
         <!-- Page status messages.
              Example: "New Plastic Product has successfully been added." -->
         @if(session()->has('message'))
-            <div class="card-body">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> <!-- Alert message close button. -->
-                <div class="alert-success alert-dissmissable fade in"><?= session()->get('message') ?></div>
-            </div>
-         @endif
-
-        <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
+            <div class="container">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button> <!-- Alert message close button. -->
+                    <?= session()->get('message') ?>
                 </div>
-            @endif
-        </div>
+            </div>
+        @endif
 
         <main class="py-4">
             @yield('content')

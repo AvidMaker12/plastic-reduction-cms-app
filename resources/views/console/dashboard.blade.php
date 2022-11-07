@@ -22,11 +22,19 @@
 
                         <p class="card-text">Selection of website data categories available for editing:</p>
 
-                        <ul id="dashboard">
-                            <li><a href="/console/plastic-products/list" class="btn btn-outline-dark mb-2 mt-2" role="button">Plastic Products</a></li>
-                            <li><a href="/console/questionnaire/list" class="btn btn-outline-dark mb-2" role="button">Questionnaire</a></li>
-                            <li><a href="<?= route('user.list') ?>" class="btn btn-outline-dark mb-2" role="button">User Accounts</a></li>
-                            <li><a href="<?= route('admin.list') ?>" class="btn btn-outline-dark" role="button">Admin Accounts</a></li>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item list-group-item-action">
+                                <a href="/console/plastic-products/list" class="btn mt-2" role="button">Plastic Products</a>
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <a href="/console/questionnaire/list" class="btn" role="button">Questionnaire</a>
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <a href="<?= route('user.list') ?>" class="btn" role="button">User Accounts</a>
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <a href="<?= route('admin.list') ?>" class="btn" role="button">Admin Accounts</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -25,15 +25,13 @@ class UserController extends Controller
 
     public function addForm()
     {
-
         return view('users.add');
-
     }
     
     public function add()
     {
         $attributes = request()->validate([
-            'username' => 'required',
+            'username' => 'required|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required',
         ]);
@@ -44,13 +42,12 @@ class UserController extends Controller
         $user->password = Hash::make($attributes['password']);
         $user->save();
 
-        return redirect('users.list')
+        return redirect(route('user.list'))
             ->with('message', 'New User has been added.');
     }
 
     public function editForm(User $user)
     {
-
         return view('users.edit', [
             'user' => $user,
         ]);
@@ -58,7 +55,6 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-
         $attributes = request()->validate([
             'username' => 'required',
             'email' => [
@@ -83,7 +79,6 @@ class UserController extends Controller
 
     public function delete(User $user)
     {
-
         // if($user->id == auth()->user()->id)
         // {
         //     return redirect('/console/users/list')
@@ -93,7 +88,7 @@ class UserController extends Controller
         $user->delete();
 
         return redirect(route('user.list'))
-            ->with('message', 'User has been deleted!');                
+            ->with('message', 'User has been deleted.');                
     }
 
     public function imageForm(User $user)
@@ -105,19 +100,20 @@ class UserController extends Controller
 
     public function image(User $user)
     {
-
         $attributes = request()->validate([
-            'profile_image' => 'required|image',
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'profile_image' => 'required|image',
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Storage::delete($user->profile_image); // Delete previously stored image, if any.
-        
-        $path = request()->file('profile_image')->store('users');
-        $user->profile_image = $path;
+        if($user->profile_image){
+            Storage::delete($user->profile_image); // Delete previously stored image, if any.
+        }
+
+        $path = request()->file('profile_image')->store('users', 'public'); // Expected string output example: users/picture.jpg
+        $user->profile_image = $path; // Expected string output example to be stored into DB: http://127.0.0.1:8000/storage/users/picture.jpg
         $user->save();
         
         return redirect(route('user.list'))
-            ->with('message', 'User profile picture has been edited.');
+            ->with('message', 'User profile picture has been saved.');
     }
 }

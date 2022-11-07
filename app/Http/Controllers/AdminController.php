@@ -25,9 +25,7 @@ class AdminController extends Controller
 
     public function addForm()
     {
-
         return view('admins.add');
-
     }
     
     public function add()
@@ -53,7 +51,6 @@ class AdminController extends Controller
 
     public function editForm(User $user)
     {
-
         return view('admins.edit', [
             'user' => $user,
         ]);
@@ -61,7 +58,6 @@ class AdminController extends Controller
 
     public function edit(User $user)
     {
-
         $attributes = request()->validate([
             'f_name' => 'required',
             'l_name' => 'required',
@@ -84,12 +80,10 @@ class AdminController extends Controller
 
         return redirect(route('admin.list'))
             ->with('message', 'Admin has been edited.');
-
     }
 
     public function delete(User $user)
     {
-
         if($user->id == auth()->user()->id)
         {
             return redirect(route('admin.list'))
@@ -100,7 +94,6 @@ class AdminController extends Controller
 
         return redirect(route('admin.list'))
             ->with('message', 'Admin has been deleted.');                
-        
     }
 
     public function imageForm(User $user)
@@ -112,7 +105,6 @@ class AdminController extends Controller
 
     public function image(User $user)
     {
-
         $attributes = request()->validate([
             // 'profile_image' => 'required|image',
             'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -127,6 +119,6 @@ class AdminController extends Controller
         $user->save();
         
         return redirect(route('admin.list'))
-            ->with('message', 'Admin profile picture has been edited.');
+            ->with('message', 'Admin profile picture has been saved.');
     }
 }

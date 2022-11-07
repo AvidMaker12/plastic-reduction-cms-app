@@ -4,29 +4,12 @@
 
 @section('content')
 
-    <!-- Page status messages.
-         Example: "New Plastic Product has successfully been added." -->
-    @if(session()->has('message'))
-        <div class="container">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button> <!-- Alert message close button. -->
-                <?= session()->get('message') ?>
-            </div>
-        </div>
-    @endif
-    @if (session('status'))
-        <div class="container">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button> <!-- Alert message close button. -->
-                {{ session('status') }}
-            </div>
-        </div>
-    @endif
-
     <section class="container">
+        <div class="d-flex justify-content-between mb-2 align-items-center">
+            <h2>Manage Users</h2>
 
-        <h2>Manage Users</h2>
-
+            <a href="<?= route('user.add') ?>" class="btn btn-success" role="button">Add New User</a>
+        </div>
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
                 <tr class="table-primary">
@@ -34,6 +17,7 @@
                     <th>Username</th>
                     <th>Email</th>
                     <th>Date Joined</th>
+                    <th>Date Last Updated</th>
                     <th></th> <!-- 'Profile Picture' edit button, 'Edit' button, 'Delete' button. -->
                 </tr>
                 <?php foreach($users as $user): ?>
@@ -41,12 +25,17 @@
                         <tr>
                             <td>
                                 <?php if($user->profile_image): ?>
-                                    <img src="<?= asset('storage/'.$user->profile_image) ?>" width="200" alt="User profile picture">
+                                    <img src="<?= asset('storage/'.$user->profile_image) ?>" height="50" alt="User profile picture">
+                                <?php elseif(!asset('storage/users/NoProfilePic1.png')): ?>
+                                    <h2><i class="bi bi-person-bounding-box"></i></h2>
+                                <?php else: ?>
+                                    <img src="<?= asset('storage/users/NoProfilePic1.png') ?>" height="50" alt="User profile picture">
                                 <?php endif; ?>
                             </td>
                             <td><?= $user->username ?></td>
                             <td><?= $user->email ?></td>
                             <td><?= $user->created_at->format('M j, Y') ?></td>
+                            <td><?= $user->updated_at->format('M j, Y, G:i e') ?></td>
                             <td><a href="<?= route('user.image',[$user->id]) ?>" class="btn btn-primary" role="button">Profile Picture</a>
                             <a href="<?= route('user.edit',[$user->id]) ?>" class="btn btn-primary" role="button">Edit</a>
                             <a href="<?= route('user.delete',[$user->id]) ?>" class="btn btn-danger" role="button">Delete</a></td>
@@ -56,10 +45,8 @@
             </table>
         </div>
 
-        <a href="<?= route('admin.add') ?>" class="btn btn-success" role="button">Add New User</a>
-        <br>
-        <br>
         <a href="<?= route('admin.home') ?>" class="btn btn-outline-dark" role="button"><i class="bi bi-chevron-left"></i> Back to Dashboard</a>
+        <a href="#top" class="btn btn-outline-dark" role="button"><i class="bi bi-chevron-double-up"></i> Back to Top</a>
 
     </section>
 @endsection

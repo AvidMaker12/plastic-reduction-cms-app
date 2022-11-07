@@ -13,12 +13,19 @@
             </div>
 
             <div class="card-body">
+                <?php if($user->profile_image): ?>
+                    <div class="mb-4">
+                        <p class="card-text">Current Profile Picture:</p>
+                        <img src="<?= asset('storage/'.$user->profile_image) ?>" width="200" alt="User profile picture">
+                    </div>
+                <?php endif; ?>
+
                 <form method="post" action="<?= route('admin.image',[$user->id])?>" novalidate class="form-horizontal" enctype="multipart/form-data">
 
                     <?= csrf_field() ?>
 
                     <div class="mb-4 mt-2">
-                        <label for="profile_image" class="form-label">Profile Picture:</label>
+                        <label for="profile_image" class="form-label">New Profile Picture:</label>
                         <input type="file" name="profile_image" id="profile_image" value="<?= old('profile_image') ?>" required class="form-control">
                         <?php if($errors->first('profile_image')): ?>
                             <br>
