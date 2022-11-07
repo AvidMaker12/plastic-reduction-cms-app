@@ -36,9 +36,13 @@
                             <td><?= $user->email ?></td>
                             <td><?= $user->created_at->format('M j, Y') ?></td>
                             <td><?= $user->updated_at->format('M j, Y, G:i e') ?></td>
-                            <td><a href="<?= route('user.image',[$user->id]) ?>" class="btn btn-primary" role="button">Profile Picture</a>
-                            <a href="<?= route('user.edit',[$user->id]) ?>" class="btn btn-primary" role="button">Edit</a>
-                            <a href="<?= route('user.delete',[$user->id]) ?>" class="btn btn-danger" role="button">Delete</a></td>
+                            <td>
+                                <a href="<?= route('user.image',[$user->id]) ?>" class="btn btn-primary" role="button">Profile Picture</a>
+                                <a href="<?= route('user.edit',[$user->id]) ?>" class="btn btn-primary" role="button">Edit</a>
+                                <!-- <a href="<?= route('user.delete',[$user->id]) ?>" class="btn btn-danger" role="button">Delete</a></td> -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $user->id }}" >Delete</button>
+                            </td>
+                            @include('users.modal.delete_modal')
                         </tr>
                     <?php endif; ?>
                 <?php endforeach; ?>
@@ -47,6 +51,5 @@
 
         <a href="<?= route('admin.home') ?>" class="btn btn-outline-dark" role="button"><i class="bi bi-chevron-left"></i> Back to Dashboard</a>
         <a href="#top" class="btn btn-outline-dark" role="button"><i class="bi bi-chevron-double-up"></i> Back to Top</a>
-
     </section>
 @endsection
