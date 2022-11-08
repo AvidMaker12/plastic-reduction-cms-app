@@ -42,15 +42,19 @@
                                 <img src="<?= asset('storage/site_images/NoImage1.jpg') ?>" height="50" alt="{{ __('Plastic product picture placeholder') }}">
                             <?php endif; ?>
                         </td>
-                        <td><?= $plastic->f_name ?> <?= $plastic->l_name ?></td>
-                        <td><?= $plastic->email ?></td>
-                        <td><?= $plastic->created_at->format('M j, Y, G:i') ?></td>
+                        <td><?= $plastic->plastic_product_name ?></td>
+                        <td><?= $plastic->category ?></td>
+                        <td><?= $plastic->description ?></td>
+                        <td><?= $plastic->product_stat ?></td>
+                        <td><?= $plastic->created_at->format('M j, Y, G:i e') ?></td>
+                        <td><?= $plastic->updated_at->format('M j, Y, G:i e') ?></td>
+                        <td><?= $plastic->user->f_name ?> <?= $plastic->user->l_name ?></td>
                         <td>
                             <a href="<?= route('admin.image',[$plastic->id]) ?>" class="btn btn-primary" role="button">{{ __('Profile Picture') }}</a>
                             <a href="<?= route('admin.edit',[$plastic->id]) ?>" class="btn btn-primary" role="button">{{ __('Edit') }}</a>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $plastic->id }}">{{ __('Delete') }}</button>
                         </td>
-                        @include('admins.modals.delete_modal')
+                        @include('plastic_products.modals.delete_modal')
                     </tr>
                 <?php endforeach; ?>
             </table>

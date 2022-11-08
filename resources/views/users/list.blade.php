@@ -34,7 +34,7 @@
                             </td>
                             <td><?= $user->username ?></td>
                             <td><?= $user->email ?></td>
-                            <td><?= $user->created_at->format('M j, Y') ?></td>
+                            <td><?= $user->created_at->format('M j, Y, G:i e') ?></td>
                             <td><?= $user->updated_at->format('M j, Y, G:i e') ?></td>
                             <td>
                                 <a href="<?= route('user.image',[$user->id]) ?>" class="btn btn-primary" role="button">Profile Picture</a>

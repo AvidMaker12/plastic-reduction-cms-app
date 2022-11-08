@@ -33,7 +33,7 @@
                             </td>
                             <td><?= $user->f_name ?> <?= $user->l_name ?></td>
                             <td><?= $user->email ?></td>
-                            <td><?= $user->created_at->format('M j, Y, G:i') ?></td>
+                            <td><?= $user->created_at->format('M j, Y, G:i e') ?></td>
                             <td>
                                 <a href="<?= route('admin.image',[$user->id]) ?>" class="btn btn-primary" role="button">{{ __('Profile Picture') }}</a>
                                 <a href="<?= route('admin.edit',[$user->id]) ?>" class="btn btn-primary" role="button">{{ __('Edit') }}</a>
