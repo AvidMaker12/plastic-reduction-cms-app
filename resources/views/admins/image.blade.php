@@ -17,12 +17,12 @@
                     <?php if($user->profile_image): ?>
                         <div>
                             <p class="card-text">{{ __('Current Profile Picture') }}:</p>
-                            <img src="<?= asset('storage/'.$user->profile_image) ?>" height="200" alt="User profile picture" class="border border-5">
+                            <img src="<?= asset('storage/'.$user->profile_image) ?>" height="200" alt="{{ __('User profile picture') }}" class="border border-5">
                         </div>
                     <?php endif; ?>
                         <div id="preview" style="display:none;">
                             <p class="card-text">{{ __('New Profile Picture Preview') }}:</p>
-                            <img id="previewImage" height="200" class="border border-5" alt="User profile picture preview"/>
+                            <img id="previewImage" height="200" class="border border-5" alt="{{ __('User profile picture preview') }}"/>
                         </div>
                 </div>
 
@@ -39,7 +39,7 @@
                         <?php endif; ?>
                     </div>
 
-                    <button type="submit" class="btn btn-success mb-3" aria-label="Save profile picture">{{ __('Save') }}</button>
+                    <button type="submit" class="btn btn-success mb-3" aria-label="{{ __('Save profile picture') }}">{{ __('Save') }}</button>
                 </form>
 
             </div>

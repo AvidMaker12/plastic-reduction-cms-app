@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title') | Console - EcoLife</title>
+    <title>@yield('title') | {{ __('Console') }} - {{ __('EcoLife') }}</title>
     <!-- <title>{{ config('app.name', 'Laravel') }}</title> -->
 
     <!-- Fonts -->
@@ -27,7 +27,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
-                    EcoLife
+                    {{ __('EcoLife') }}
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -100,7 +100,7 @@
         @if(session()->has('message'))
             <div class="container">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button> <!-- Alert message close button. -->
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></button> <!-- Alert message close button. -->
                     <?= session()->get('message') ?>
                 </div>
             </div>
