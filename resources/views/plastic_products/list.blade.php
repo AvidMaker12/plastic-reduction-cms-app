@@ -8,7 +8,7 @@
         <div class="d-flex justify-content-between mb-2 align-items-center">
             <h2>{{ __('Manage Plastic Products') }}</h2>
 
-            <a href="<?= route('admin.add') ?>" class="btn btn-success" role="button">{{ __('Add New Plastic Product') }}</a>
+            <a href="<?= route('plastic.add') ?>" class="btn btn-success" role="button">{{ __('Add New Plastic Product') }}</a>
         </div>
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
@@ -21,7 +21,7 @@
                     <th>{{ __('Product Statistics') }}</th>
                     <th>{{ __('Date Created') }}</th>
                     <th>{{ __('Date Updated') }}</th>
-                    <th>{{ __('Added By') }}</th>
+                    <th>{{ __('Created By') }}</th>
                     <th></th> <!-- 'Icon' edit button, 'Picture' edit button, 'Edit' button, 'Delete' button. -->
                 </tr>
                 <?php foreach($plastic_products as $plastic): ?>
@@ -50,8 +50,9 @@
                         <td><?= $plastic->updated_at->format('M j, Y, G:i e') ?></td>
                         <td><?= $plastic->user->f_name ?> <?= $plastic->user->l_name ?></td>
                         <td>
-                            <a href="<?= route('admin.image',[$plastic->id]) ?>" class="btn btn-primary" role="button">{{ __('Profile Picture') }}</a>
-                            <a href="<?= route('admin.edit',[$plastic->id]) ?>" class="btn btn-primary" role="button">{{ __('Edit') }}</a>
+                            <a href="<?= route('plastic.icon',[$plastic->id]) ?>" class="btn btn-primary" role="button">{{ __('Icon') }}</a>
+                            <a href="<?= route('plastic.image',[$plastic->id]) ?>" class="btn btn-primary" role="button">{{ __('Image') }}</a>
+                            <a href="<?= route('plastic.edit',[$plastic->id]) ?>" class="btn btn-primary" role="button">{{ __('Edit') }}</a>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $plastic->id }}">{{ __('Delete') }}</button>
                         </td>
                         @include('plastic_products.modals.delete_modal')

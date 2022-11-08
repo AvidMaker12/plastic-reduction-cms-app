@@ -61,5 +61,7 @@ Route::post('/admin/plastic_products/add', [PlasticProductController::class, 'ad
 Route::get('/admin/plastic_products/edit/{plastic_product:id}', [PlasticProductController::class, 'editForm'])->name('plastic.edit')->where('user', '[0-9]+')->middleware('is_admin');
 Route::post('/admin/plastic_products/edit/{plastic_product:id}', [PlasticProductController::class, 'edit'])->where('plastic_product', '[0-9]+')->middleware('is_admin');
 Route::get('/admin/plastic_products/delete/{plastic_product:id}', [PlasticProductController::class, 'delete'])->where('plastic_product', '[0-9]+')->name('plastic.delete')->middleware('is_admin');
+Route::get('/admin/plastic_products/icon/{plastic_product:id}', [PlasticProductController::class, 'iconForm'])->where('plastic_product', '[0-9]+')->name('plastic.icon')->middleware('is_admin');
+Route::post('/admin/plastic_products/icon/{plastic_product:id}', [PlasticProductController::class, 'icon'])->where('plastic_product', '[0-9]+')->name('plastic.icon')->middleware('is_admin');
 Route::get('/admin/plastic_products/image/{plastic_product:id}', [PlasticProductController::class, 'imageForm'])->where('plastic_product', '[0-9]+')->name('plastic.image')->middleware('is_admin');
 Route::post('/admin/plastic_products/image/{plastic_product:id}', [PlasticProductController::class, 'image'])->where('plastic_product', '[0-9]+')->name('plastic.image')->middleware('is_admin');

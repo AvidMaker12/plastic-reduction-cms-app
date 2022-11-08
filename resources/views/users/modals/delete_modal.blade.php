@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Permanently delete user <b>{{ $user->username }}</b> ?
+                {{ __('Permanently delete user') }} <b>{{ $user->username }}</b> ?
             </div>
             <div class="modal-footer">
                 <a href="<?= route('user.delete',[$user->id]) ?>" class="btn btn-danger" data-be-dismiss="modal" role="button">Delete</a>

@@ -42,8 +42,9 @@ class UserController extends Controller
         $user->password = Hash::make($attributes['password']);
         $user->save();
 
+        $message = 'New User &#39;'.$user->username.'&#39; has been added.';
         return redirect(route('user.list'))
-            ->with('message', 'New User has been added.');
+            ->with('message', $message);
     }
 
     public function editForm(User $user)
@@ -73,8 +74,9 @@ class UserController extends Controller
 
         $user->save();
 
+        $message = 'User &#39;'.$user->username.'&#39; has been edited.';
         return redirect(route('user.list'))
-            ->with('message', 'User has been edited.');
+            ->with('message', $message);
     }
 
     public function delete(User $user)
@@ -87,8 +89,9 @@ class UserController extends Controller
         
         $user->delete();
 
+        $message = 'User &#39;'.$user->username.'&#39; has been deleted.';
         return redirect(route('user.list'))
-            ->with('message', 'User has been deleted.');                
+            ->with('message', $message);                
     }
 
     public function imageForm(User $user)

@@ -1,6 +1,6 @@
 @extends('layouts_console.app_console')
 
-@section('title') {{'Users'}} @endsection <!-- Dynamic page tab title. -->
+@section('title') {{ __('Users') }} @endsection <!-- Dynamic page tab title. -->
 
 @section('content')
 

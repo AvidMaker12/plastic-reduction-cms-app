@@ -45,8 +45,9 @@ class AdminController extends Controller
         $user->is_admin = 1;
         $user->save();
 
+        $message = 'New Admin &#39;'.$user->f_name.' '.$user->l_name.'&#39; has been added.';
         return redirect(route('admin.list'))
-            ->with('message', 'New Admin has been added.');
+            ->with('message', $message);
     }
 
     public function editForm(User $user)
@@ -78,8 +79,9 @@ class AdminController extends Controller
 
         $user->save();
 
+        $message = 'Admin &#39;'.$user->f_name.' '.$user->l_name.'&#39; has been edited.';
         return redirect(route('admin.list'))
-            ->with('message', 'Admin has been edited.');
+            ->with('message', $message);
     }
 
     public function delete(User $user)
@@ -92,8 +94,9 @@ class AdminController extends Controller
         
         $user->delete();
 
+        $message = 'Admin &#39;'.$user->f_name.' '.$user->l_name.'&#39; has been deleted.';
         return redirect(route('admin.list'))
-            ->with('message', 'Admin has been deleted.');                
+            ->with('message', $message);               
     }
 
     public function imageForm(User $user)

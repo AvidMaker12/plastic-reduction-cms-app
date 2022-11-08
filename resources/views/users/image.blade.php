@@ -16,14 +16,14 @@
                 <div class="d-flex justify-content-start mb-4 align-items-end">
                     <?php if($user->profile_image): ?>
                         <div>
-                            <p class="card-text">{{ __('Current Profile Picture') }}:</p>
-                            <img src="<?= asset('storage/'.$user->profile_image) ?>" height="200" alt="{{ __('User profile picture') }}" class="border border-5">
+                            <p class="card-text">{{ __('Current Profile Picture:') }}</p>
+                            <img src="<?= asset('storage/'.$user->profile_image) ?>" height="200" alt="{{ __('Current user profile picture') }}" class="border border-5">
                         </div>
                     <?php endif; ?>
-                        <div id="preview" style="display:none;">
-                            <p class="card-text">{{ __('New Profile Picture Preview') }}:</p>
-                            <img id="previewImage" height="200" class="border border-5" alt="{{ __('User profile picture preview') }}"/>
-                        </div>
+                    <div id="preview" style="display:none;" class="ms-4">
+                        <p class="card-text">{{ __('New Profile Picture Preview:') }}</p>
+                        <img id="preview_image" height="200" class="border border-5" alt="{{ __('User profile picture preview') }}"/>
+                    </div>
                 </div>
 
                 <form method="post" action="<?= route('user.image',[$user->id])?>" novalidate class="form-horizontal" enctype="multipart/form-data">
@@ -31,8 +31,8 @@
                     <?= csrf_field() ?>
 
                     <div class="mb-4 mt-2">
-                        <label for="profile_image" class="form-label">{{ __('Select New Profile Picture') }}:</label>
-                        <input type="file" name="profile_image" id="profile_image" value="<?= old('profile_image') ?>" required class="form-control" onchange="loadFile(event)">
+                        <label for="profile_image" class="form-label">{{ __('Select New Profile Picture:') }}</label>
+                        <input type="file" name="profile_image" id="image" value="<?= old('profile_image') ?>" required class="form-control" onchange="loadFile(event)">
                         <?php if($errors->first('profile_image')): ?>
                             <br>
                             <span class="text-danger"><?= $errors->first('profile_image'); ?></span>

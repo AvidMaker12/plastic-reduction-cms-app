@@ -12,7 +12,7 @@ use Illuminate\Validation\Rule;
 class PlasticProductController extends Controller
 {
     public function list()
-    {      
+    {             
         return view('plastic_products.list', [
             'plastic_products' => PlasticProduct::all(),
             // 'users' => $user
@@ -32,7 +32,6 @@ class PlasticProductController extends Controller
             'category' => 'required',
             'description' => 'required',
             'product_stat' => 'required',
-            'user_id' => 'required',
             'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -49,8 +48,9 @@ class PlasticProductController extends Controller
         $plastic_product->image = $path_image;
         $plastic_product->save();
 
+        $message = 'New Plastic Product &#39;'.$plastic_product->plastic_product_name.'&#39; has been added.';
         return redirect(route('plastic.list'))
-            ->with('message', 'New Plastic Product has been added.');
+            ->with('message', $message);
     }
 
     public function editForm(PlasticProduct $plastic_product)
@@ -76,16 +76,18 @@ class PlasticProductController extends Controller
         $plastic_product->user_id = Auth::user()->id;
         $plastic_product->save();
 
+        $message = 'Plastic Product &#39;'.$plastic_product->plastic_product_name.'&#39; has been edited.';
         return redirect(route('plastic.list'))
-            ->with('message', 'Plastic product has been edited.');
+            ->with('message', $message);
     }
 
     public function delete(PlasticProduct $plastic_product)
     {        
         $plastic_product->delete();
         
+        $message = 'Plastic Product &#39;'.$plastic_product->plastic_product_name.'&#39; has been deleted.';
         return redirect(route('plastic.list'))
-            ->with('message', 'Plastic product has been deleted.');               
+            ->with('message', $message);            
     }
 
     public function iconForm(PlasticProduct $plastic_product)
@@ -110,7 +112,7 @@ class PlasticProductController extends Controller
         $plastic_product->save();
         
         return redirect(route('plastic.list'))
-            ->with('message', 'Plastic product icon has been saved.');
+            ->with('message', 'Plastic Product icon has been saved.');
     }
 
     public function imageForm(PlasticProduct $plastic_product)
@@ -135,6 +137,6 @@ class PlasticProductController extends Controller
         $plastic_product->save();
         
         return redirect(route('plastic.list'))
-            ->with('message', 'Plastic product image has been saved.');
+            ->with('message', 'Plastic Product image has been saved.');
     }
 }
