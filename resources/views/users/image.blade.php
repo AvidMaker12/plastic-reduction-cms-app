@@ -13,6 +13,7 @@
             </div>
 
             <div class="card-body">
+                <!-- Image Upload Preview: -->
                 <div class="d-flex justify-content-start mb-4 align-items-end">
                     <?php if($user->profile_image): ?>
                         <div>

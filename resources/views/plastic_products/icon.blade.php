@@ -12,6 +12,7 @@
             </div>
 
             <div class="card-body">
+                <!-- Icon Upload Preview: -->
                 <div class="d-flex justify-content-start mb-4 align-items-end">
                     <?php if($plastic_product->icon): ?>
                         <div>
@@ -23,12 +24,12 @@
                     <?php else: ?>
                         <div>
                             <p class="card-text">{{ __('Current Plastic Product Icon:') }}</p>
-                            <img src="<?= asset('storage/site_images/NoImage1.jpg') ?>" height="200" alt="{{ __('Plastic product picture placeholder') }}">
+                            <img src="<?= asset('storage/site_images/NoImage1.jpg') ?>" height="200" alt="{{ __('Plastic product icon placeholder') }}">
                         </div>
                     <?php endif; ?>
 
                     <div id="preview" style="display:none;" class="ms-4">
-                        <p class="card-text">{{ __('New Plastic Product Image Preview:') }}</p>
+                        <p class="card-text">{{ __('New Plastic Product Icon Preview:') }}</p>
                         <img id="preview_image" height="200" class="border border-5" alt="{{ __('Plastic product icon preview') }}"/>
                     </div>
                 </div>
@@ -44,6 +45,7 @@
                             <br>
                             <span class="text-danger"><?= $errors->first('icon'); ?></span>
                         <?php endif; ?>
+                        <p class="card-text mt-2">{{ __('Note: Maximum image size is 2048 kilobytes (2.048 megabytes).') }}</p>
                     </div>
 
                     <button type="submit" class="btn btn-success mb-3" aria-label="{{ __('Save plastic product icon') }}">{{ __('Save') }}</button>

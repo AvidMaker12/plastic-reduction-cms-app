@@ -42,6 +42,7 @@
                             <br>
                             <span class="text-danger"><?= $errors->first('password'); ?></span>
                         <?php endif; ?>
+                        <p class="card-text">{{ __('Note: Password must be at least 8 characters long.') }}</p>
                     </div>
 
                     <button type="submit" class="btn btn-success mb-3">{{ __('Edit User') }}</button>

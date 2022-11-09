@@ -12,6 +12,7 @@
             </div>
 
             <div class="card-body">
+                <!-- Image Upload Preview: -->
                 <div class="d-flex justify-content-start mb-4 align-items-end">
                     <?php if($plastic_product->image): ?>
                         <div>
@@ -35,6 +36,7 @@
                             <br>
                             <span class="text-danger"><?= $errors->first('image'); ?></span>
                         <?php endif; ?>
+                        <p class="card-text mt-2">{{ __('Note: Maximum image size is 2048 kilobytes (2.048 megabytes).') }}</p>
                     </div>
 
                     <button type="submit" class="btn btn-success mb-3" aria-label="{{ __('Save plastic product image') }}">{{ __('Save') }}</button>

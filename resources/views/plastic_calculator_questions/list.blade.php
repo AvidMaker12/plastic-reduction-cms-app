@@ -21,32 +21,33 @@
                     <th>{{ __('Created By') }}</th>
                     <th></th> <!-- 'Icon' edit button, 'Edit' button, 'Delete' button. -->
                 </tr>
-                <?php foreach($plastic_calculator_questions as $question): ?>
+                <?php foreach($plastic_calculator_questions as $plastic_calculator_question): ?>
                     <tr>
                         <td>
-                            <?php if($question->icon): ?>
-                                <img src="<?= asset('storage/'.$question->icon) ?>" height="50" alt="{{ __('Plastic calculator question icon') }}">
+                            <?php if($plastic_calculator_question->icon): ?>
+                                <img src="<?= asset('storage/'.$plastic_calculator_question->icon) ?>" height="50" alt="{{ __('Plastic calculator question icon') }}">
                             <?php else: ?>
                                 <h2><i class="bi bi-card-image" alt="{{ __('Plastic calculator question icon') }}"></i></h2>
                             <?php endif; ?>
                         </td>
                         <td>
-                            <?php if($question->image): ?>
-                                <img src="<?= asset('storage/'.$question->image) ?>" height="50" alt="{{ __('Plastic calculator question picture') }}">
+                            <?php if($plastic_calculator_question->image): ?>
+                                <img src="<?= asset('storage/'.$plastic_calculator_question->image) ?>" height="50" alt="{{ __('Plastic calculator question picture') }}">
                             <?php elseif(!asset('storage/site_images/NoImage1.jpg')): ?>
                                 <h2><i class="bi bi-card-image"></i></h2>
                             <?php else: ?>
                                 <img src="<?= asset('storage/site_images/NoImage1.jpg') ?>" height="50" alt="{{ __('Plastic calculator question picture placeholder') }}">
                             <?php endif; ?>
                         </td>
-                        <td><?= $question->question ?></td>
-                        <td><?= $question->created_at->format('M j, Y, G:i e') ?></td>
-                        <td><?= $question->updated_at->format('M j, Y, G:i e') ?></td>
-                        <td><?= $question->user->f_name ?> <?= $question->user->l_name ?></td>
+                        <td><?= $plastic_calculator_question->question ?></td>
+                        <td><?= $plastic_calculator_question->created_at->format('M j, Y, G:i e') ?></td>
+                        <td><?= $plastic_calculator_question->updated_at->format('M j, Y, G:i e') ?></td>
+                        <td><?= $plastic_calculator_question->user->f_name ?> <?= $plastic_calculator_question->user->l_name ?></td>
                         <td>
-                            <a href="<?= route('plastic_calculator_question.icon',[$question->id]) ?>" class="btn btn-primary" role="button">{{ __('Icon') }}</a>
-                            <a href="<?= route('plastic_calculator_question.edit',[$question->id]) ?>" class="btn btn-primary" role="button">{{ __('Edit') }}</a>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $question->id }}">{{ __('Delete') }}</button>
+                            <a href="<?= route('plastic_calculator_question.icon',[$plastic_calculator_question->id]) ?>" class="btn btn-primary" role="button">{{ __('Icon') }}</a>
+                            <a href="<?= route('plastic_calculator_question.image',[$plastic_calculator_question->id]) ?>" class="btn btn-primary" role="button">{{ __('Image') }}</a>
+                            <a href="<?= route('plastic_calculator_question.edit',[$plastic_calculator_question->id]) ?>" class="btn btn-primary" role="button">{{ __('Edit') }}</a>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $plastic_calculator_question->id }}">{{ __('Delete') }}</button>
                         </td>
                         @include('plastic_calculator_questions.modals.delete_modal')
                     </tr>
