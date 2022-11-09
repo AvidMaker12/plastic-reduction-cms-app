@@ -16,6 +16,8 @@ class PlasticCalculatorQuestion extends Model
      */
     protected $fillable = [
         'question',
+        'icon',
+        'image',
         'user_id',
     ];
 

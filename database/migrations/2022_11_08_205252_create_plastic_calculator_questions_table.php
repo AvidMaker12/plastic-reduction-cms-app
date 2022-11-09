@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('plastic_calculator_questions', function (Blueprint $table) {
             $table->id();
             $table->string('question');
-            $table->foreignId('user_id');
+            $table->foreignId('user_id'); // ID of admin who added info to table.
+            $table->string('icon')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
