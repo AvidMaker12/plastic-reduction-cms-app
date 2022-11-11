@@ -6,50 +6,68 @@
 
     <section class="container">
         <div class="d-flex justify-content-between mb-2 align-items-center">
-            <h2>{{ __('Manage Plastic Calculator Questions') }}</h2>
+            <h2>{{ __('Manage Plastic Calculator Question') }}</h2>
 
-            <a href="<?= route('plastic_calculator_question.add') ?>" class="btn btn-success" role="button">{{ __('Add New Plastic Calculator Question') }}</a>
+            <a href="<?= route('plastic_calculator_question.add') ?>" class="btn btn-success" role="button" aria-label="{{ __('Add New Plastic Calculator Question') }}">{{ __('Add New Question') }}</a>
         </div>
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
                 <tr class="table-primary">
+                    <th>{{ __('ID') }}</th>
                     <th>{{ __('Icon') }}</th>
                     <th>{{ __('Image') }}</th>
                     <th>{{ __('Question') }}</th>
-                    <th>{{ __('Date Created') }}</th>
-                    <th>{{ __('Date Updated') }}</th>
-                    <th>{{ __('Created By') }}</th>
+                    <th>{{ __('Multiple Choice Answers') }}</th>
+                    <th>{{ __('Admin Info') }}</th>
                     <th></th> <!-- 'Icon' edit button, 'Edit' button, 'Delete' button. -->
                 </tr>
-                <?php foreach($plastic_calculator_questions as $plastic_calculator_question): ?>
+                <?php foreach($plastic_calculator_questions as $question): ?>
                     <tr>
                         <td>
-                            <?php if($plastic_calculator_question->icon): ?>
-                                <img src="<?= asset('storage/'.$plastic_calculator_question->icon) ?>" height="50" alt="{{ __('Plastic calculator question icon') }}">
+                            <?= $question->id ?>
+                        </td>
+                        <td>
+                            <?php if($question->icon): ?>
+                                <img src="<?= asset('storage/'.$question->icon) ?>" height="50" alt="{{ __('Plastic calculator question icon') }}">
                             <?php else: ?>
                                 <h2><i class="bi bi-card-image" alt="{{ __('Plastic calculator question icon') }}"></i></h2>
                             <?php endif; ?>
                         </td>
                         <td>
-                            <?php if($plastic_calculator_question->image): ?>
-                                <img src="<?= asset('storage/'.$plastic_calculator_question->image) ?>" height="50" alt="{{ __('Plastic calculator question picture') }}">
+                            <?php if($question->image): ?>
+                                <img src="<?= asset('storage/'.$question->image) ?>" height="50" alt="{{ __('Plastic calculator question picture') }}">
                             <?php elseif(!asset('storage/site_images/NoImage1.jpg')): ?>
                                 <h2><i class="bi bi-card-image"></i></h2>
                             <?php else: ?>
                                 <img src="<?= asset('storage/site_images/NoImage1.jpg') ?>" height="50" alt="{{ __('Plastic calculator question picture placeholder') }}">
                             <?php endif; ?>
                         </td>
-                        <td><?= $plastic_calculator_question->question ?></td>
-                        <td><?= $plastic_calculator_question->created_at->format('M j, Y, G:i e') ?></td>
-                        <td><?= $plastic_calculator_question->updated_at->format('M j, Y, G:i e') ?></td>
-                        <td><?= $plastic_calculator_question->user->f_name ?> <?= $plastic_calculator_question->user->l_name ?></td>
+                        <td><?= $question->question ?></td>
                         <td>
-                            <a href="<?= route('plastic_calculator_question.icon',[$plastic_calculator_question->id]) ?>" class="btn btn-primary" role="button">{{ __('Icon') }}</a>
-                            <a href="<?= route('plastic_calculator_question.image',[$plastic_calculator_question->id]) ?>" class="btn btn-primary" role="button">{{ __('Image') }}</a>
-                            <a href="<?= route('plastic_calculator_question.edit',[$plastic_calculator_question->id]) ?>" class="btn btn-primary" role="button">{{ __('Edit') }}</a>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $plastic_calculator_question->id }}">{{ __('Delete') }}</button>
+                            <ul>
+                                <?php foreach($plastic_calculator_multiple_choices as $multiple_choice): ?>
+                                    <?php if($multiple_choice->plastic_calculator_question_id === $question->id): ?>
+                                        <li><?= $multiple_choice->choice ?></li>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </ul>
+                            <button type="button" class="btn btn-success mb-1" data-bs-toggle="modal" data-bs-target="#modalAddChoice{{ $question->id }}" aria-label="{{ __('Add New Multiple Choice') }}">{{ __('Add Multiple Choice') }}</button>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>{{ __('Date Created:') }} <br><?= $question->created_at->format('M j, Y, G:i e') ?></li>
+                                <li>{{ __('Date Updated:') }} <br><?= $question->updated_at->format('M j, Y, G:i e') ?></li>
+                                <li>{{ __('Created By:') }} <br><?= $question->user->f_name ?> <?= $question->user->l_name ?></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="<?= route('plastic_calculator_question.icon',[$question->id]) ?>" class="btn btn-primary mb-1" role="button">{{ __('Icon') }}</a>
+                            <a href="<?= route('plastic_calculator_question.image',[$question->id]) ?>" class="btn btn-primary mb-1" role="button">{{ __('Image') }}</a>
+                            <a href="<?= route('plastic_calculator_question.edit',[$question->id]) ?>" class="btn btn-primary mb-1" role="button">{{ __('Edit') }}</a>
+                            <button type="button" class="btn btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $question->id }}">{{ __('Delete') }}</button>
                         </td>
                         @include('plastic_calculator_questions.modals.delete_modal')
+                        @include('plastic_calculator_questions.modals.add_choice_modal')
                     </tr>
                 <?php endforeach; ?>
             </table>

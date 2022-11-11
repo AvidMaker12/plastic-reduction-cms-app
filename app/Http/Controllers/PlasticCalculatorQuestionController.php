@@ -17,6 +17,7 @@ class PlasticCalculatorQuestionController extends Controller
     {             
         return view('plastic_calculator_questions.list', [
             'plastic_calculator_questions' => PlasticCalculatorQuestion::all(),
+            'plastic_calculator_multiple_choices' => PlasticCalculatorMultipleChoice::all(),
             'users' => User::all()
         ]);
     }
@@ -28,8 +29,6 @@ class PlasticCalculatorQuestionController extends Controller
     
     public function add()
     {
-        // dd(request());
-
         $attributes = request()->validate([
             'question' => 'required',
         ]);
@@ -43,10 +42,50 @@ class PlasticCalculatorQuestionController extends Controller
             ->with('message', 'New Plastic Calculator Question has been added.');
     }
 
+    public function addChoice(PlasticCalculatorQuestion $plastic_calculator_question) // PlasticCalculatorQuestion $plastic_calculator_question, PlasticCalculatorMultipleChoice $plastic_calculator_multiple_choice
+    {
+        $attributes = request()->validate([
+            'choice' => 'required',
+            'choice_category' => 'required',
+            'slug' => 'required',
+            'icon' => 'nullable',
+            'plastic_calculator_question_id' => 'required',
+        ]);
+
+        $plastic_calculator_multiple_choice = new PlasticCalculatorMultipleChoice();
+        $plastic_calculator_multiple_choice->choice = $attributes['choice'];
+        $plastic_calculator_multiple_choice->choice_category = $attributes['choice_category'];
+        $plastic_calculator_multiple_choice->slug = $attributes['slug'];
+        $plastic_calculator_multiple_choice->plastic_calculator_question_id = $attributes['plastic_calculator_question_id'];
+
+        if(request()->file('icon')){
+            // Storage::delete($plastic_calculator_multiple_choice->icon); // Delete previously stored image, if any.
+            $path = request()->file('icon')->store('plastic_calculator_multiple_choices', 'public');
+            $plastic_calculator_multiple_choice->icon = $path;
+        }else{
+            $path = null; // Sets icon to null if no icon uploaded. Gives users option to upload icon later.
+        }
+        // if($plastic_calculator_multiple_choice->icon){
+        //     // Storage::delete($plastic_calculator_multiple_choice->icon); // Delete previously stored image, if any.
+        //     $path = request()->file('icon')->store('plastic_calculator_multiple_choices', 'public');
+        //     $plastic_calculator_multiple_choice->icon = $path;
+        // }else{
+        //     $path = null; // Sets icon to null if no icon uploaded. Gives users option to upload icon later.
+        // }
+
+        $plastic_calculator_multiple_choice->plastic_calculator_question_id = $attributes['plastic_calculator_question_id'];
+        $plastic_calculator_multiple_choice->user_id = Auth::user()->id;
+        $plastic_calculator_multiple_choice->save();
+
+        return redirect(route('plastic_calculator_question.list'))
+            ->with('message', 'New Multiple Choice has been added to Question '.$attributes['plastic_calculator_question_id'].'.');
+    }
+
     public function editForm(PlasticCalculatorQuestion $plastic_calculator_question)
     {
         return view('plastic_calculator_questions.edit', [
             'plastic_calculator_question' => $plastic_calculator_question,
+            'plastic_calculator_multiple_choice' => PlasticCalculatorMultipleChoice::all(),
         ]);
     }
 

@@ -16,20 +16,20 @@
                 <div class="d-flex justify-content-start mb-4 align-items-end">
                     <?php if($plastic_calculator_question->icon): ?>
                         <div>
-                            <p class="card-text">{{ __('Current Plastic Calculator Question Icon:') }}</p>
+                            <p class="card-text">{{ __('Current Icon:') }}</p>
                             <img src="<?= asset('storage/'.$plastic_calculator_question->icon) ?>" height="200" alt="{{ __('Current plastic calculator question icon') }}" class="border border-5">
                         </div>
                     <?php elseif(!asset('storage/site_images/NoImage1.jpg')): ?>
                         <h2><i class="bi bi-card-image"></i></h2>
                     <?php else: ?>
                         <div>
-                            <p class="card-text">{{ __('Current Plastic Calculator Question Icon:') }}</p>
+                            <p class="card-text">{{ __('Current Icon:') }}</p>
                             <img src="<?= asset('storage/site_images/NoImage1.jpg') ?>" height="200" alt="{{ __('Plastic calculator question icon placeholder') }}">
                         </div>
                     <?php endif; ?>
 
                     <div id="preview" style="display:none;" class="ms-4">
-                        <p class="card-text">{{ __('New Plastic Calculator Question Icon Preview:') }}</p>
+                        <p class="card-text">{{ __('New Icon Preview:') }}</p>
                         <img id="preview_image" height="200" class="border border-5" alt="{{ __('Plastic calculator question icon preview') }}"/>
                     </div>
                 </div>

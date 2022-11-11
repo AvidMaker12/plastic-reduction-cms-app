@@ -37,10 +37,10 @@
                             <td><?= $user->created_at->format('M j, Y, G:i e') ?></td>
                             <td><?= $user->updated_at->format('M j, Y, G:i e') ?></td>
                             <td>
-                                <a href="<?= route('user.image',[$user->id]) ?>" class="btn btn-primary" role="button">{{ __('Profile Picture') }}</a>
-                                <a href="<?= route('user.edit',[$user->id]) ?>" class="btn btn-primary" role="button">{{ __('Edit') }}</a>
+                                <a href="<?= route('user.image',[$user->id]) ?>" class="btn btn-primary mb-1" role="button">{{ __('Profile Picture') }}</a>
+                                <a href="<?= route('user.edit',[$user->id]) ?>" class="btn btn-primary mb-1" role="button">{{ __('Edit') }}</a>
                                 <!-- <a href="<?= route('user.delete',[$user->id]) ?>" class="btn btn-danger" role="button">Delete</a></td> -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $user->id }}" >{{ __('Delete') }}</button>
+                                <button type="button" class="btn btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $user->id }}" >{{ __('Delete') }}</button>
                             </td>
                             @include('users.modals.delete_modal')
                         </tr>

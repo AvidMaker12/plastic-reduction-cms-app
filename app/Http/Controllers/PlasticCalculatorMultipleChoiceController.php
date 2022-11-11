@@ -14,9 +14,10 @@ use Illuminate\Validation\Rule;
 class PlasticCalculatorMultipleChoiceController extends Controller
 {
     public function list()
-    {             
+    {
         return view('plastic_calculator_multiple_choices.list', [
             'plastic_calculator_multiple_choices' => PlasticCalculatorMultipleChoice::all(),
+            'plastic_calculator_questions' => PlasticCalculatorQuestion::all(),
             'users' => User::all()
         ]);
     }

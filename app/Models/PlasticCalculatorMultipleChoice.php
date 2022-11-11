@@ -17,10 +17,13 @@ class PlasticCalculatorMultipleChoice extends Model
     protected $fillable = [
         'plastic_calculator_question_id',
         'choice',
+        'choice_category',
         'icon',
+        'slug',
         'user_id'
     ];
 
+    // --- Allow the views to access table foreign key data. ---
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

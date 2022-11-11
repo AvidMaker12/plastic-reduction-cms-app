@@ -50,10 +50,10 @@
                         <td><?= $plastic->updated_at->format('M j, Y, G:i e') ?></td>
                         <td><?= $plastic->user->f_name ?> <?= $plastic->user->l_name ?></td>
                         <td>
-                            <a href="<?= route('plastic.icon',[$plastic->id]) ?>" class="btn btn-primary" role="button">{{ __('Icon') }}</a>
-                            <a href="<?= route('plastic.image',[$plastic->id]) ?>" class="btn btn-primary" role="button">{{ __('Image') }}</a>
-                            <a href="<?= route('plastic.edit',[$plastic->id]) ?>" class="btn btn-primary" role="button">{{ __('Edit') }}</a>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $plastic->id }}">{{ __('Delete') }}</button>
+                            <a href="<?= route('plastic.icon',[$plastic->id]) ?>" class="btn btn-primary mb-1" role="button">{{ __('Icon') }}</a>
+                            <a href="<?= route('plastic.image',[$plastic->id]) ?>" class="btn btn-primary mb-1" role="button">{{ __('Image') }}</a>
+                            <a href="<?= route('plastic.edit',[$plastic->id]) ?>" class="btn btn-primary mb-1" role="button">{{ __('Edit') }}</a>
+                            <button type="button" class="btn btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $plastic->id }}">{{ __('Delete') }}</button>
                         </td>
                         @include('plastic_products.modals.delete_modal')
                     </tr>

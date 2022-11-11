@@ -7,7 +7,6 @@
 window.onload = pageLoad;
 
 function pageLoad() {
-
     // --- VARIABLES / DOM OBJECTS ---
     // DOM: <div>, to control show/hide:
     var preview = document.getElementById('preview');
@@ -22,7 +21,7 @@ function pageLoad() {
     // --- LOGIC ---
     // Function to show/hide image upload preview:
     function loadFile(event) {
-        // alert("functionProcess TEST"); // Debug test to check function is working: comment-out upon successful debug.
+         alert("loadFile TEST"); // Debug test to check function is working: comment-out upon successful debug.
         previewImage.src = URL.createObjectURL(event.target.files[0]);
         preview.style.display = "block";
     };
