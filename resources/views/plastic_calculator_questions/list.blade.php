@@ -6,7 +6,7 @@
 
     <section class="container">
         <div class="d-flex justify-content-between mb-2 align-items-center">
-            <h2>{{ __('Manage Plastic Calculator Question') }}</h2>
+            <h2>{{ __('Manage Plastic Calculator Questions and Choices') }}</h2>
 
             <a href="<?= route('plastic_calculator_question.add') ?>" class="btn btn-success" role="button" aria-label="{{ __('Add New Plastic Calculator Question') }}">{{ __('Add New Question') }}</a>
         </div>
@@ -51,6 +51,11 @@
                                     <?php foreach($plastic_calculator_multiple_choices as $multiple_choice): ?>
                                         <?php if($multiple_choice->plastic_calculator_question_id === $question->id): ?>
                                             <li>
+                                                <?php if($multiple_choice->icon): ?>
+                                                    <img src="<?= asset('storage/'.$multiple_choice->icon) ?>" height="50" alt="{{ __('Plastic calculator multiple choice icon') }}">
+                                                <?php else: ?>
+                                                    <h2><i class="bi bi-card-image" alt="{{ __('Icon placeholder') }}"></i></h2>
+                                                <?php endif; ?>
                                                 <b>ID <?= $multiple_choice->id ?>:</b> <?= $multiple_choice->choice ?>
                                                 <div class="dropdown mt-2">
                                                     <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton<?= $multiple_choice->id ?>" data-bs-toggle="dropdown" aria-expanded="false">
@@ -58,14 +63,14 @@
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<?= $multiple_choice->id ?>">
                                                         <li>
-                                                            <a href="<?= route('plastic_calculator_multiple_choice.edit',[$multiple_choice->id]) ?>" class="dropdown-item" role="button">
+                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEditChoice{{ $multiple_choice->id }}">
                                                                 <i class="bi bi-gear-fill me-2"></i> {{ __('Edit') }}
-                                                            </a>
+                                                            </button>
                                                         </li>
                                                         <li>
-                                                            <a href="<?= route('plastic_calculator_multiple_choice.icon',[$multiple_choice->id]) ?>" class="dropdown-item" role="button">
+                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalIconChoice{{ $multiple_choice->id }}">
                                                                 <i class="bi bi-card-image me-2"></i> {{ __('Icon') }}
-                                                            </a>
+                                                            </button>
                                                         </li>
                                                         <li>
                                                             <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalDeleteChoice{{ $multiple_choice->id }}">
@@ -76,9 +81,11 @@
                                                 </div>
                                             </li>
                                             <hr>
+                                            @include('plastic_calculator_questions.modals.add_choice_modal')
+                                            @include('plastic_calculator_questions.modals.edit_choice_modal')
+                                            @include('plastic_calculator_questions.modals.icon_choice_modal')
+                                            @include('plastic_calculator_questions.modals.delete_choice_modal')
                                         <?php endif; ?>
-                                        @include('plastic_calculator_questions.modals.add_choice_modal')
-                                        @include('plastic_calculator_questions.modals.delete_choice_modal')
                                     <?php endforeach; ?>
                                 </ul>
                                 <button type="button" class="btn btn-success mb-1" data-bs-toggle="modal" data-bs-target="#modalAddChoice{{ $question->id }}" aria-label="{{ __('Add New Multiple Choice') }}">{{ __('Add Multiple Choice') }}</button>

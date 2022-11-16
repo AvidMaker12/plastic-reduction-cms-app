@@ -68,16 +68,18 @@ Route::post('/admin/plastic_products/icon/{plastic_product:id}', [PlasticProduct
 Route::get('/admin/plastic_products/image/{plastic_product:id}', [PlasticProductController::class, 'imageForm'])->where('plastic_product', '[0-9]+')->name('plastic.image')->middleware('is_admin');
 Route::post('/admin/plastic_products/image/{plastic_product:id}', [PlasticProductController::class, 'image'])->where('plastic_product', '[0-9]+')->name('plastic.image')->middleware('is_admin');
 
-// CONSOLE PLASTIC CALCULATOR QUESTION CMS PAGES
+// CONSOLE PLASTIC CALCULATOR QUESTION & CHOICES CMS PAGES
 Route::get('/admin/plastic_calculator_questions', [PlasticCalculatorQuestionController::class, 'list'])->name('plastic_calculator_question.list')->middleware('is_admin');
 Route::get('/admin/plastic_calculator_questions/add', [PlasticCalculatorQuestionController::class, 'addForm'])->name('plastic_calculator_question.add')->middleware('is_admin');
 Route::post('/admin/plastic_calculator_questions/add', [PlasticCalculatorQuestionController::class, 'add'])->middleware('is_admin');
-Route::post('/admin/plastic_calculator_questions/addChoice', [PlasticCalculatorQuestionController::class, 'addChoice'])->name('plastic_calculator_question.addChoice')->middleware('is_admin');
+Route::post('/admin/plastic_calculator_questions/add-choice', [PlasticCalculatorQuestionController::class, 'addChoice'])->name('plastic_calculator_question.addChoice')->middleware('is_admin');
 Route::get('/admin/plastic_calculator_questions/edit/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'editForm'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.edit')->middleware('is_admin');
 Route::post('/admin/plastic_calculator_questions/edit/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'edit'])->where('plastic_calculator_question', '[0-9]+')->middleware('is_admin');
+Route::post('/admin/plastic_calculator_questions/edit-choice/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'editChoice'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.editChoice')->middleware('is_admin');
 Route::get('/admin/plastic_calculator_questions/delete/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'delete'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.delete')->middleware('is_admin');
 Route::get('/admin/plastic_calculator_questions/icon/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'iconForm'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.icon')->middleware('is_admin');
 Route::post('/admin/plastic_calculator_questions/icon/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'icon'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.icon')->middleware('is_admin');
+Route::post('/admin/plastic_calculator_questions/icon-choice/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'iconChoice'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.iconChoice')->middleware('is_admin');
 Route::get('/admin/plastic_calculator_questions/image/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'imageForm'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.image')->middleware('is_admin');
 Route::post('/admin/plastic_calculator_questions/image/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'image'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.image')->middleware('is_admin');
 
