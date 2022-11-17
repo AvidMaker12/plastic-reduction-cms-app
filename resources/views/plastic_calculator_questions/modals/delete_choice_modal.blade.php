@@ -11,7 +11,7 @@
                 {{ __('Permanently delete this multiple choice') }}?
             </div>
             <div class="modal-footer">
-                <a href="<?= route('plastic_calculator_multiple_choice.delete',[$multiple_choice->id]) ?>" class="btn btn-danger" data-be-dismiss="modal" role="button">{{ __('Delete') }}</a>
+                <a href="<?= route('plastic_calculator_question.deleteChoice',[$multiple_choice->id]) ?>" class="btn btn-danger" data-be-dismiss="modal" role="button">{{ __('Delete') }}</a>
                 <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
             </div>
         </div>

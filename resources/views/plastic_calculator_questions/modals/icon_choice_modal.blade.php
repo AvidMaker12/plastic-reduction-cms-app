@@ -1,4 +1,4 @@
-<form method="post" action="<?= route('plastic_calculator_multiple_choice.icon',[$multiple_choice->id])?>" novalidate class="form-horizontal" enctype="multipart/form-data">
+<form method="post" action="<?= route('plastic_calculator_question.iconChoice',[$multiple_choice->id])?>" novalidate class="form-horizontal" enctype="multipart/form-data">
     <?= csrf_field() ?>
     <div class="modal fade" id="modalIconChoice{{ $multiple_choice->id }}" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true" area-labelledby="modalIconChoiceTitle{{ $multiple_choice->id }}" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered" role="document">

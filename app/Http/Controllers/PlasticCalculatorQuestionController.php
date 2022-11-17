@@ -146,6 +146,14 @@ class PlasticCalculatorQuestionController extends Controller
             ->with('message', 'Plastic Calculator Question has been deleted.');            
     }
 
+    public function deleteChoice(PlasticCalculatorMultipleChoice $multiple_choice, PlasticCalculatorQuestion $plastic_calculator_question)
+    {        
+        $multiple_choice->delete();
+
+        return redirect(route('plastic_calculator_question.list'))
+            ->with('message', 'Multiple Choice '.$multiple_choice->id.' for question '.$multiple_choice->plastic_calculator_question_id.' has been deleted.');            
+    }
+
     public function iconForm(PlasticCalculatorQuestion $plastic_calculator_question)
     {
         return view('plastic_calculator_questions.icon', [
