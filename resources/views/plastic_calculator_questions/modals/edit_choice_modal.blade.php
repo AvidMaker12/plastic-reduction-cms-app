@@ -11,8 +11,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-4">
-                        For Question <?= $question->id ?>:
-                        <br><?= $question->question ?>
+                        <label for="question_id" class="form-label">{{ __('Question:') }} <?= $question->question ?></label>
+                        <input type="text" name="question_id" id="question_id" value="<?= old('question_id', $question->id) ?>"  required class="form-control">
+                        <?php if($errors->first('question_id')): ?>
+                            <br>
+                            <span class="text-danger"><?= $errors->first('question_id'); ?></span>
+                        <?php endif; ?>
+                        <div id="questionHelp" class="form-text">{{ __('Note: Above is question ID for reference only.') }}</div>
                     </div>
 
                     <div class="mb-4">

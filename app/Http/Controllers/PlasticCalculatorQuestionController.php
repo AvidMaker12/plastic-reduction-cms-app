@@ -96,29 +96,28 @@ class PlasticCalculatorQuestionController extends Controller
             ->with('message', 'Plastic Calculator Question '.$plastic_calculator_question->id.' has been edited.');
     }
 
-    public function editChoice(PlasticCalculatorQuestion $plastic_calculator_question, PlasticCalculatorMultipleChoice $plastic_calculator_multiple_choice) // PlasticCalculatorQuestion $plastic_calculator_question, PlasticCalculatorMultipleChoice $plastic_calculator_multiple_choice
+    public function editChoice(PlasticCalculatorMultipleChoice $multiple_choice, PlasticCalculatorQuestion $plastic_calculator_question) // PlasticCalculatorQuestion $plastic_calculator_question, PlasticCalculatorMultipleChoice $plastic_calculator_multiple_choice
     {
         $attributes = request()->validate([
             'choice' => 'required',
             'choice_category' => 'required',
             'slug' => 'required',
             'icon' => 'nullable',
-            'plastic_calculator_question_id' => 'required',
+            'question_id' => 'required',
         ]);
 
-        // $plastic_calculator_multiple_choice = PlasticCalculatorMultipleChoice::all();
-        $plastic_calculator_multiple_choice->choice = $attributes['choice'];
-        $plastic_calculator_multiple_choice->choice_category = $attributes['choice_category'];
-        $plastic_calculator_multiple_choice->slug = $attributes['slug'];
-        $plastic_calculator_multiple_choice->plastic_calculator_question_id = $attributes['plastic_calculator_question_id'];
+        // $multiple_choice = PlasticCalculatorMultipleChoice::all();
+        $multiple_choice->choice = $attributes['choice'];
+        $multiple_choice->choice_category = $attributes['choice_category'];
+        $multiple_choice->slug = $attributes['slug'];
 
-        if(request()->file('icon') && !$plastic_calculator_multiple_choice->icon){ // If user is uploading new icon and there is no existing icon in the database.
+        if(request()->file('icon') && !$multiple_choice->icon){ // If user is uploading new icon and there is no existing icon in the database.
             $path = request()->file('icon')->store('plastic_calculator_multiple_choices', 'public');
-            $plastic_calculator_multiple_choice->icon = $path;
-        }elseif($plastic_calculator_multiple_choice->icon){ // If icon exits in database and user is not uploading a new icon.
-            Storage::delete($plastic_calculator_multiple_choice->icon); // Delete previously stored image, if any.
+            $multiple_choice->icon = $path;
+        }elseif($multiple_choice->icon){ // If icon exits in database and user is not uploading a new icon.
+            Storage::delete($multiple_choice->icon); // Delete previously stored image, if any.
             $path = request()->file('icon')->store('plastic_calculator_multiple_choices', 'public');
-            $plastic_calculator_multiple_choice->icon = $path;
+            $multiple_choice->icon = $path;
         }else{ // If there is no icon in database and user is not uploading a new icon.
             $path = null; // Sets icon to null if no icon uploaded. Gives users option to upload icon later.
         }
@@ -130,12 +129,12 @@ class PlasticCalculatorQuestionController extends Controller
         //     $path = null; // Sets icon to null if no icon uploaded. Gives users option to upload icon later.
         // }
 
-        $plastic_calculator_multiple_choice->plastic_calculator_question_id = $attributes['plastic_calculator_question_id'];
-        $plastic_calculator_multiple_choice->user_id = Auth::user()->id;
-        $plastic_calculator_multiple_choice->save();
+        $multiple_choice->plastic_calculator_question_id = $attributes['question_id'];
+        $multiple_choice->user_id = Auth::user()->id;
+        $multiple_choice->save();
 
         return redirect(route('plastic_calculator_question.list'))
-            ->with('message', 'Multiple Choice '.$plastic_calculator_multiple_choice->id.' for Question '.$attributes['plastic_calculator_question_id'].' has been edited.');
+            ->with('message', 'Multiple Choice '.$multiple_choice->id.' for Question '.$attributes['question_id'].' has been edited.');
     }
 
     public function delete(PlasticCalculatorQuestion $plastic_calculator_question)
