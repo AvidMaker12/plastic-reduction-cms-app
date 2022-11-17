@@ -46,49 +46,77 @@
                                 <?php endif; ?>
                             </td>
                             <td class="col-3"><?= $question->question ?></td>
-                            <td class="col-3">
-                                <ul>
-                                    <?php foreach($plastic_calculator_multiple_choices as $multiple_choice): ?>
-                                        <?php if($multiple_choice->plastic_calculator_question_id === $question->id): ?>
-                                            <li>
-                                                <?php if($multiple_choice->icon): ?>
-                                                    <img src="<?= asset('storage/'.$multiple_choice->icon) ?>" height="50" alt="{{ __('Plastic calculator multiple choice icon') }}">
-                                                <?php else: ?>
-                                                    <h2><i class="bi bi-card-image" alt="{{ __('Icon placeholder') }}"></i></h2>
-                                                <?php endif; ?>
-                                                <b>ID <?= $multiple_choice->id ?>:</b> <?= $multiple_choice->choice ?>
-                                                <div class="dropdown mt-2">
-                                                    <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton<?= $multiple_choice->id ?>" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Settings
-                                                    </button>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<?= $multiple_choice->id ?>">
-                                                        <li>
-                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEditChoice{{ $multiple_choice->id }}">
-                                                                <i class="bi bi-gear-fill me-2"></i> {{ __('Edit') }}
+                            <td class="col-3 p-0">
+
+                                <table class="table table-hover table-responsive mb-0">
+                                    <thead class="table-info">
+                                        <tr>
+                                            <th scope="col">ID</th> <!-- Icon for multiple choice text. -->
+                                            <th scope="col">Icon</th> <!-- Icon for multiple choice text. -->
+                                            <th scope="col">Multiple Choice</th>
+                                            <th scope="col"></th> <!-- Space for Settings button -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($plastic_calculator_multiple_choices as $multiple_choice): ?>
+                                            <?php if($multiple_choice->plastic_calculator_question_id === $question->id): ?>
+                                                <tr>
+                                                    <!-- Multiple Choice ID -->
+                                                    <td>
+                                                        <?= $multiple_choice->id ?>
+                                                    </td>
+
+                                                    <!-- Multiple Choice Icon -->
+                                                    <td>
+                                                        <?php if($multiple_choice->icon): ?>
+                                                            <img src="<?= asset('storage/'.$multiple_choice->icon) ?>" height="50" alt="{{ __('Plastic calculator multiple choice icon') }}">
+                                                        <?php else: ?>
+                                                            <h2><i class="bi bi-card-image" alt="{{ __('Icon placeholder') }}"></i></h2>
+                                                        <?php endif; ?>
+                                                    </td>
+
+                                                    <!-- Multiple Choice ID & Text -->
+                                                    <td>
+                                                        <?= $multiple_choice->choice ?>
+                                                    </td>
+                                                    
+                                                    <!-- Multiple Choice Settings Dropdown Menu -->
+                                                    <td>
+                                                        <div class="dropdown mt-2">
+                                                            <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton<?= $multiple_choice->id ?>" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                Settings
                                                             </button>
-                                                        </li>
-                                                        <li>
-                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalIconChoice{{ $multiple_choice->id }}">
-                                                                <i class="bi bi-card-image me-2"></i> {{ __('Icon') }}
-                                                            </button>
-                                                        </li>
-                                                        <li>
-                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalDeleteChoice{{ $multiple_choice->id }}">
-                                                                <i class="bi bi-x-square-fill me-2"></i> {{ __('Delete') }}
-                                                            </button>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <hr>
-                                            @include('plastic_calculator_questions.modals.add_choice_modal')
-                                            @include('plastic_calculator_questions.modals.edit_choice_modal')
-                                            @include('plastic_calculator_questions.modals.icon_choice_modal')
-                                            @include('plastic_calculator_questions.modals.delete_choice_modal')
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                </ul>
-                                <button type="button" class="btn btn-success mb-1" data-bs-toggle="modal" data-bs-target="#modalAddChoice{{ $question->id }}" aria-label="{{ __('Add New Multiple Choice') }}">{{ __('Add Multiple Choice') }}</button>
+                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<?= $multiple_choice->id ?>">
+                                                                <li>
+                                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEditChoice{{ $multiple_choice->id }}">
+                                                                        <i class="bi bi-gear-fill me-2"></i> {{ __('Edit') }}
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalIconChoice{{ $multiple_choice->id }}">
+                                                                        <i class="bi bi-card-image me-2"></i> {{ __('Icon') }}
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalDeleteChoice{{ $multiple_choice->id }}">
+                                                                        <i class="bi bi-x-square-fill me-2"></i> {{ __('Delete') }}
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @include('plastic_calculator_questions.modals.add_choice_modal')
+                                                @include('plastic_calculator_questions.modals.edit_choice_modal')
+                                                @include('plastic_calculator_questions.modals.icon_choice_modal')
+                                                @include('plastic_calculator_questions.modals.delete_choice_modal')
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <div class="d-flex justify-content-end align-items-center m-2">
+                                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalAddChoice{{ $question->id }}" aria-label="{{ __('Add New Multiple Choice') }}" title="Add New Multiple Choice">{{ __('Add') }}</button>
+                                </div>
                             </td>
                             <td>
                                 <ul>
