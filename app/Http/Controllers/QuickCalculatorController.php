@@ -33,12 +33,13 @@ class QuickCalculatorController extends Controller
         $currentURL = $request->fullUrl(); // Show full current URL with parameters.
     }
 
-    public function quickResult()
+    public function quickResult(PlasticCalculatorMultipleChoice $quick_choices)
     {
         return view('quick_calculator.result', [
             'quick_questions' => PlasticCalculatorQuestion::all(),
-            'quick_choices' => PlasticCalculatorMultipleChoice::all(),
+            'quick_choices' => $quick_choices,
             'plastic_products' => PlasticProduct::all(),
+            'segmentURL' => \Request::segment(3)
         ]);
     }
 }

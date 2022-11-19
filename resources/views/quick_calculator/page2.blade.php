@@ -16,7 +16,7 @@
         <?php endforeach; ?>
 
         <div class="mt-5">
-            <form method="post" action="<?= route('quick_calculator.result')?>" name="quickCalculatorForm" novalidate class="form-horizontal" enctype="multipart/form-data">
+            <form method="get" action="<?= route('quick_calculator.result',$segmentURL)?>" name="quickCalculatorForm" novalidate class="form-horizontal" enctype="multipart/form-data">
                 <?= csrf_field() ?>
                 <!-- Logic for listing relevant categories that matches question 1 selected choice. -->
                 <?php foreach($quick_choices as $quick_choice): ?>
@@ -25,7 +25,7 @@
                         <?php foreach($plastic_products as $plastic): ?>
                             <?php if($plastic->category == $quick_choice->choice): ?> <!-- If the category names match, then output respective plastic products. -->
                                 <div class="form-check">
-                                    <input class="btn-check" type="checkbox" value="<?= $plastic->plastic_product_name ?>" id="btn-check<?= $plastic->id ?>" autocomplete="off" role="button">
+                                    <input class="btn-check" type="checkbox" value="<?= old($plastic->plastic_product_name) ?>" id="btn-check<?= $plastic->id ?>" autocomplete="off" role="button">
                                     <label class="btn btn-outline-primary btn-lg" for="btn-check<?= $plastic->id ?>"><b><?= $plastic->plastic_product_name ?></b></label>
                                     <br>
                                     <h5 class="mt-4">Description:</h5>

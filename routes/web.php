@@ -98,4 +98,4 @@ Route::get('/admin/plastic_calculator_multiple_choices', [PlasticCalculatorMulti
 // QUICK CALCULATOR
 Route::get('/quick-calculator/page1', [QuickCalculatorController::class, 'quickQuestion1'])->name('quick_calculator.pg1');
 Route::get('/quick-calculator/page2/{quick_choices:slug}', [QuickCalculatorController::class, 'quickQuestion2'])->where('quick_choices', '[A-z\-]+')->name('quick_calculator.pg2');
-Route::get('/quick-calculator/results', [QuickCalculatorController::class, 'quickResult'])->name('quick_calculator.result');
+Route::get('/quick-calculator/results/{quick_choices:slug}', [QuickCalculatorController::class, 'quickResult'])->where('quick_choices', '[A-z\-]+')->name('quick_calculator.result');

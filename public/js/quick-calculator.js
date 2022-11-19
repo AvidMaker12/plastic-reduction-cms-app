@@ -16,7 +16,10 @@ function pageLoad() {
     
     // Delete localStorage stored info button:
     // var btnDel = document.getElementById("btnDel");
-    
+
+
+    var inputElements = document.getElementsByTagName("input"); // Array of input elements inside form.
+    // alert("inputElements = " + inputElements.item(3).id);
 
     //==== LOGIC ====
 
@@ -25,22 +28,22 @@ function pageLoad() {
         //alert("functionProcess TEST"); // Debug test to check function formProcess is working: comment-out upon successful debug.
         
         //---FORM VARIABLES---
-        var inputElements = formListener.getElementsByTagName("input"); // Array of input elements inside form.
+        // var inputElements = formListener.getElementsByTagName("input"); // Array of input elements inside form.
         var score = 0; // User's total score, to be counted.
         var totalPoints = inputElements.length; // Total availabe points to score.
 
 
         //---FORM FILTER---
-        for (let i = 0; i < inputElements.length; i++ ) {
+        for (let i = 0; i < totalPoints; i++ ) {
     		// var check = document.getElementById(inputElements[i].id);
     		// console.log(check);
 
             // ---SCORE SYSTEM---
             if (inputElements[i].checked) { // Count how many checkboxes have been checked, which becomes the score.
-                var score = score++;
+                score += 1;
             }
-	    }
-
+	    } // End of for loop.
+        
 
         //---FORM VALIDATION---
 
@@ -60,26 +63,28 @@ function pageLoad() {
             console.error("LocalStorage: quickResult = " + LS_quickResult);
         } else {
             console.log("LocalStorage: Question 1 input = " + LS_quickResult);
+            console.log("Variable 'score' = " + score);
         }
 
+        
     } // End of function formProcess.
 
     // LocalStorage: Retrieve stored stored values:
     var LS_quickResult = localStorage.getItem("quickResult"); // This is useful for when navigating back to home page and ensuring user input data persist, if needed.
 
     // Function: Delete local storage values:
-    function localStorageDel() {
-        // Local storage: delete specified items:
-        localStorage.removeItem("quickResult"); // localStorage.clear not used in case other local storage items needs to be kept.
-    }
+    // function localStorageDel() {
+    //     // Local storage: delete specified items:
+    //     localStorage.removeItem("quickResult"); // localStorage.clear not used in case other local storage items needs to be kept.
+    // }
 
 
     // Event listener for button:
     formListener.onsubmit = formProcess;
-    alert("Form validation test before loading next page"); // Comment-out this line upon successful test.
+    // alert("Form validation test before loading next page"); // Comment-out this line upon successful test.
 
     // LocalStorage: Delete storage data:
-    btnDel.onclick = localStorageDel; // Delete localStorage stored info upon button click, resets page welcome text and background color to default.
+    // btnDel.onclick = localStorageDel; // Delete localStorage stored info upon button click, resets page welcome text and background color to default.
 
 } // End onload function.
 
