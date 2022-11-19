@@ -12,7 +12,7 @@
                 <div class="modal-body">
                     <div class="mb-4">
                         <label for="plastic_calculator_question_id" class="form-label">{{ __('Question:') }}</label>
-                        <input type="text" name="plastic_calculator_question_id" id="choice" value="<?= old('plastic_calculator_question_id'), $question->id ?>" required class="form-control" disabled>
+                        <input type="text" name="plastic_calculator_question_id" id="plastic_calculator_question_id" value="<?= old('plastic_calculator_question_id'), $question->id ?>" required class="form-control" disabled>
                         <?php if($errors->first('plastic_calculator_question_id')): ?>
                             <br>
                             <span class="text-danger"><?= $errors->first('plastic_calculator_question_id'); ?></span>

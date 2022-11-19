@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PlasticProductController;
 use App\Http\Controllers\PlasticCalculatorQuestionController;
 use App\Http\Controllers\PlasticCalculatorMultipleChoiceController;
+use App\Http\Controllers\QuickCalculatorController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -22,15 +23,12 @@ use Illuminate\Support\Facades\Route;
 
 // HOME PAGE
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 // USER DASHBOARD
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('user.home')->middleware('auth');
 
 // ADMIN CONSOLE CMS DASHBOARD
@@ -72,7 +70,7 @@ Route::post('/admin/plastic_products/image/{plastic_product:id}', [PlasticProduc
 Route::get('/admin/plastic_calculator_questions', [PlasticCalculatorQuestionController::class, 'list'])->name('plastic_calculator_question.list')->middleware('is_admin');
 Route::get('/admin/plastic_calculator_questions/add', [PlasticCalculatorQuestionController::class, 'addForm'])->name('plastic_calculator_question.add')->middleware('is_admin');
 Route::post('/admin/plastic_calculator_questions/add', [PlasticCalculatorQuestionController::class, 'add'])->middleware('is_admin');
-Route::post('/admin/plastic_calculator_questions/add-choice', [PlasticCalculatorQuestionController::class, 'addChoice'])->name('plastic_calculator_question.addChoice')->middleware('is_admin');
+Route::post('/admin/plastic_calculator_questions/add-choice/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'addChoice'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.addChoice')->middleware('is_admin');
 Route::get('/admin/plastic_calculator_questions/edit/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'editForm'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.edit')->middleware('is_admin');
 Route::post('/admin/plastic_calculator_questions/edit/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'edit'])->where('plastic_calculator_question', '[0-9]+')->middleware('is_admin');
 Route::post('/admin/plastic_calculator_questions/edit-choice/{multiple_choice:id}', [PlasticCalculatorQuestionController::class, 'editChoice'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.editChoice')->middleware('is_admin'); // Note: variable name inside get() curly-braces max. 32 characters.
@@ -95,3 +93,9 @@ Route::get('/admin/plastic_calculator_multiple_choices', [PlasticCalculatorMulti
 // Route::post('/admin/plastic_calculator_multiple_choices/icon/{plastic_calculator_multiple_choice:id}', [PlasticCalculatorMultipleChoiceController::class, 'icon'])->where('plastic_calculator_multiple_choice', '[0-9]+')->name('plastic_calculator_multiple_choice.icon')->middleware('is_admin');
 // Route::get('/admin/plastic_calculator_multiple_choices/image/{plastic_calculator_multiple_choice:id}', [PlasticCalculatorMultipleChoiceController::class, 'imageForm'])->where('plastic_calculator_multiple_choice', '[0-9]+')->name('plastic_calculator_multiple_choice.image')->middleware('is_admin');
 // Route::post('/admin/plastic_calculator_multiple_choices/image/{plastic_calculator_multiple_choice:id}', [PlasticCalculatorMultipleChoiceController::class, 'image'])->where('plastic_calculator_multiple_choice', '[0-9]+')->name('plastic_calculator_multiple_choice.image')->middleware('is_admin');
+
+
+// QUICK CALCULATOR
+Route::get('/quick-calculator/page1', [QuickCalculatorController::class, 'quickQuestion1'])->name('quick_calculator.pg1');
+Route::get('/quick-calculator/page2/{quick_choices:slug}', [QuickCalculatorController::class, 'quickQuestion2'])->where('quick_choices', '[A-z\-]+')->name('quick_calculator.pg2');
+Route::get('/quick-calculator/results', [QuickCalculatorController::class, 'quickResult'])->name('quick_calculator.result');

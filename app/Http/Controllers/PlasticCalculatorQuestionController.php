@@ -52,23 +52,22 @@ class PlasticCalculatorQuestionController extends Controller
             'plastic_calculator_question_id' => 'required',
         ]);
 
-        $plastic_calculator_multiple_choice = new PlasticCalculatorMultipleChoice();
-        $plastic_calculator_multiple_choice->choice = $attributes['choice'];
-        $plastic_calculator_multiple_choice->choice_category = $attributes['choice_category'];
-        $plastic_calculator_multiple_choice->slug = $attributes['slug'];
-        $plastic_calculator_multiple_choice->plastic_calculator_question_id = $attributes['plastic_calculator_question_id'];
+        $multiple_choice = new PlasticCalculatorMultipleChoice();
+        $multiple_choice->choice = $attributes['choice'];
+        $multiple_choice->choice_category = $attributes['choice_category'];
+        $multiple_choice->slug = $attributes['slug'];
 
         if(request()->file('icon')){
             // Storage::delete($plastic_calculator_multiple_choice->icon); // Delete previously stored image, if any.
             $path = request()->file('icon')->store('plastic_calculator_multiple_choices', 'public');
-            $plastic_calculator_multiple_choice->icon = $path;
+            $multiple_choice->icon = $path;
         }else{
-            $path = null; // Sets icon to null if no icon uploaded. Gives users option to upload icon later.
+            $multiple_choice->icon = null; // Sets icon to null if no icon uploaded. Gives users option to upload icon later.
         }
 
-        $plastic_calculator_multiple_choice->plastic_calculator_question_id = $attributes['plastic_calculator_question_id'];
-        $plastic_calculator_multiple_choice->user_id = Auth::user()->id;
-        $plastic_calculator_multiple_choice->save();
+        $multiple_choice->plastic_calculator_question_id = $attributes['plastic_calculator_question_id'];
+        $multiple_choice->user_id = Auth::user()->id;
+        $multiple_choice->save();
 
         return redirect(route('plastic_calculator_question.list'))
             ->with('message', 'New Multiple Choice has been added to Question '.$attributes['plastic_calculator_question_id'].'.');
@@ -93,7 +92,7 @@ class PlasticCalculatorQuestionController extends Controller
         $plastic_calculator_question->save();
 
         return redirect(route('plastic_calculator_question.list'))
-            ->with('message', 'Plastic Calculator Question '.$plastic_calculator_question->id.' has been edited.');
+            ->with('message', 'Question '.$plastic_calculator_question->id.' has been edited.');
     }
 
     public function editChoice(PlasticCalculatorMultipleChoice $multiple_choice, PlasticCalculatorQuestion $plastic_calculator_question) // PlasticCalculatorQuestion $plastic_calculator_question, PlasticCalculatorMultipleChoice $plastic_calculator_multiple_choice
@@ -119,7 +118,7 @@ class PlasticCalculatorQuestionController extends Controller
             $path = request()->file('icon')->store('plastic_calculator_multiple_choices', 'public');
             $multiple_choice->icon = $path;
         }else{ // If there is no icon in database and user is not uploading a new icon.
-            $path = null; // Sets icon to null if no icon uploaded. Gives users option to upload icon later.
+            $multiple_choice->icon = null; // Sets icon to null if no icon uploaded. Gives users option to upload icon later.
         }
         // if($plastic_calculator_multiple_choice->icon){
         //     Storage::delete($plastic_calculator_multiple_choice->icon); // Delete previously stored image, if any.
@@ -150,7 +149,7 @@ class PlasticCalculatorQuestionController extends Controller
         $multiple_choice->delete();
 
         return redirect(route('plastic_calculator_question.list'))
-            ->with('message', 'Multiple Choice '.$multiple_choice->id.' for question '.$multiple_choice->plastic_calculator_question_id.' has been deleted.');            
+            ->with('message', 'Multiple Choice '.$multiple_choice->id.' for Question '.$multiple_choice->plastic_calculator_question_id.' has been deleted.');            
     }
 
     public function iconForm(PlasticCalculatorQuestion $plastic_calculator_question)

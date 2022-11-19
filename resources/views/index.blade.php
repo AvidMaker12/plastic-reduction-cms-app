@@ -4,27 +4,16 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Console Dashboard') }}</div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <!-- {{ __('You are logged in!') }} -->
-
-                        <ul id="dashboard">
-                            <li><a href="/console/plastic-products/list">Plastic Products</a></li>
-                            <li><a href="/console/questionnaire/list">Questionnaire</a></li>
-                            <li><a href="/console/clients/list">User Accounts</a></li>
-                            <li><a href="/console/admins/list">Admin Accounts</a></li> <!-- NOTE: Rename routing from 'users' to 'admin'. -->
-                        </ul>
-                    </div>
+        <div class="d-flex justify-content-center">
+            <div class="col-md-8 mt-4">
+                <!-- SITE WELCOME TITLE -->
+                <h1 class="d-flex justify-content-center"><b>{{ __('EcoLife Plastic Reduction') }}</b></h1>
+                <br>
+                <!-- SLOGAN -->
+                <p class="d-flex justify-content-center h5">{{ __('The simple web app that helps reduce your plastic consumption') }}</p>
+                <!-- PLASTIC REDUCTION CALCULATOR BUTTON LINK -->
+                <div class="d-flex justify-content-center mt-5">
+                    <a href="<?= route('quick_calculator.pg1') ?>" class="btn btn-success btn-lg" role="button"><i class="bi bi-play-fill"></i> {{ __('Start Plastic Waste Calculator') }}</a>
                 </div>
             </div>
         </div>
