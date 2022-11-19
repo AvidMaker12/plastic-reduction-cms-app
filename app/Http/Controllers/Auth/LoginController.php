@@ -50,7 +50,7 @@ class LoginController extends Controller
             if(auth()->user()->is_admin == 1){
                 return redirect()->route('admin.home'); // Route name from web.php
             }else{
-                return redirect()->route('home'); // Redirect to user dashboard 'home' page instead of admin console if the user is not an admin.
+                return redirect()->route('user.home'); // Redirect to user dashboard 'home' page instead of admin console if the user is not an admin.
             }
         }else{
             return redirect()->route('login')->with('error','Incorrect email and password combination.');

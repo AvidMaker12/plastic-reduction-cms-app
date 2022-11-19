@@ -7,6 +7,7 @@ use App\Http\Controllers\PlasticProductController;
 use App\Http\Controllers\PlasticCalculatorQuestionController;
 use App\Http\Controllers\PlasticCalculatorMultipleChoiceController;
 use App\Http\Controllers\QuickCalculatorController;
+use App\Http\Controllers\QuestionnaireController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -99,3 +100,8 @@ Route::get('/admin/plastic_calculator_multiple_choices', [PlasticCalculatorMulti
 Route::get('/quick-calculator/page1', [QuickCalculatorController::class, 'quickQuestion1'])->name('quick_calculator.pg1');
 Route::get('/quick-calculator/page2/{quick_choices:slug}', [QuickCalculatorController::class, 'quickQuestion2'])->where('quick_choices', '[A-z\-]+')->name('quick_calculator.pg2');
 Route::get('/quick-calculator/results/{quick_choices:slug}', [QuickCalculatorController::class, 'quickResult'])->where('quick_choices', '[A-z\-]+')->name('quick_calculator.result');
+
+// USER PLASTIC REDUCTION QUESTIONNAIRE
+Route::get('/questionnaire/page1', [QuestionnaireController::class, 'Question1'])->name('questionnaire.pg1');
+Route::get('/questionnaire/page2/{quick_choices:slug}', [QuestionnaireController::class, 'Question2'])->where('quick_choices', '[A-z\-]+')->name('questionnaire.pg2');
+Route::get('/questionnaire/results/{quick_choices:slug}', [QuestionnaireController::class, 'Result'])->where('quick_choices', '[A-z\-]+')->name('questionnaire.result');
