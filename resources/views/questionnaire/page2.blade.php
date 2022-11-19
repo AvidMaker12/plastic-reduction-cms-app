@@ -7,16 +7,16 @@
 @section('content')
     <section class="container">
 
-        <h1 class="h4">{{ __('Plastic Reduction Questionnaire') }}</h1>
+        <h1 class="h4 d-flex justify-content-center">{{ __('Plastic Reduction Questionnaire') }}</h1>
         <br>
         <?php foreach($quick_questions as $quick_question): ?>
             <?php if($quick_question->id == 2): ?>
-                <h2 class="h3"><?= $quick_question->question ?></h2>
+                <h2 class="h3 d-flex justify-content-center"><?= $quick_question->question ?></h2>
             <?php endif; ?>
         <?php endforeach; ?>
 
         <div class="mt-5">
-            <form method="get" action="<?= route('quick_calculator.result',$segmentURL)?>" name="quickCalculatorForm" novalidate class="form-horizontal" enctype="multipart/form-data">
+            <form method="get" action="<?= route('questionnaire.result',$segmentURL)?>" name="quickCalculatorForm" novalidate class="form-horizontal" enctype="multipart/form-data">
                 <?= csrf_field() ?>
                 <!-- Logic for listing relevant categories that matches question 1 selected choice. -->
                 <?php foreach($quick_choices as $quick_choice): ?>

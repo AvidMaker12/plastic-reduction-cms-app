@@ -29,7 +29,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// USER DASHBOARD
+// USER LOGIN DASHBOARD
 Route::get('/home', [HomeController::class, 'index'])->name('user.home')->middleware('auth');
 
 // ADMIN CONSOLE CMS DASHBOARD
@@ -102,6 +102,6 @@ Route::get('/quick-calculator/page2/{quick_choices:slug}', [QuickCalculatorContr
 Route::get('/quick-calculator/results/{quick_choices:slug}', [QuickCalculatorController::class, 'quickResult'])->where('quick_choices', '[A-z\-]+')->name('quick_calculator.result');
 
 // USER PLASTIC REDUCTION QUESTIONNAIRE
-Route::get('/questionnaire/page1', [QuestionnaireController::class, 'Question1'])->name('questionnaire.pg1');
-Route::get('/questionnaire/page2/{quick_choices:slug}', [QuestionnaireController::class, 'Question2'])->where('quick_choices', '[A-z\-]+')->name('questionnaire.pg2');
-Route::get('/questionnaire/results/{quick_choices:slug}', [QuestionnaireController::class, 'Result'])->where('quick_choices', '[A-z\-]+')->name('questionnaire.result');
+Route::get('/questionnaire/page1', [QuestionnaireController::class, 'Question1'])->name('questionnaire.pg1')->middleware('auth');
+Route::get('/questionnaire/page2/{quick_choices:slug}', [QuestionnaireController::class, 'Question2'])->where('quick_choices', '[A-z\-]+')->name('questionnaire.pg2')->middleware('auth');
+Route::get('/questionnaire/results/{quick_choices:slug}', [QuestionnaireController::class, 'Result'])->where('quick_choices', '[A-z\-]+')->name('questionnaire.result')->middleware('auth');
