@@ -1,6 +1,6 @@
 <form method="post" action="<?= route('plastic_calculator_question.addChoice',[$question->id])?>" novalidate class="form-horizontal" enctype="multipart/form-data">
     <?= csrf_field() ?>
-    <div class="modal fade" id="modalAddChoice{{ $question->id }}" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true" area-labelledby="modalAddChoiceTitle{{ $question->id }}" tabindex="-1">
+    <div class="modal fade" id="modalAddChoice{{ $question->id }}" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true" area-labelledby="modalAddChoiceTitle{{ $question->id }}" tabindex="-2">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -11,8 +11,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-4">
-                        <label for="plastic_calculator_question_id" class="form-label">{{ __('Question:') }}</label>
-                        <input type="text" name="plastic_calculator_question_id" id="plastic_calculator_question_id" value="<?= old('plastic_calculator_question_id'), $question->id ?>" required class="form-control" disabled>
+                        <label for="plastic_calculator_question_id" class="form-label">{{ __('For Question') }} <?= $question->id ?>:</label>
+                        <input type="text" name="plastic_calculator_question_id" id="plastic_calculator_question_id" value="<?= old('plastic_calculator_question_id'), $question->id ?>" class="form-control" aria-hidden="true" tabindex="-1">
                         <?php if($errors->first('plastic_calculator_question_id')): ?>
                             <br>
                             <span class="text-danger"><?= $errors->first('plastic_calculator_question_id'); ?></span>

@@ -106,7 +106,6 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                @include('plastic_calculator_questions.modals.add_choice_modal')
                                                 @include('plastic_calculator_questions.modals.edit_choice_modal')
                                                 @include('plastic_calculator_questions.modals.icon_choice_modal')
                                                 @include('plastic_calculator_questions.modals.delete_choice_modal')
@@ -117,6 +116,7 @@
                                 <div class="d-flex justify-content-end align-items-center m-2">
                                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalAddChoice{{ $question->id }}" aria-label="{{ __('Add New Multiple Choice') }}" title="Add New Multiple Choice">{{ __('Add') }}</button>
                                 </div>
+                                @include('plastic_calculator_questions.modals.add_choice_modal')
                             </td>
                             <td>
                                 <ul>
