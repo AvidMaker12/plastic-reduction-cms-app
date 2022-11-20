@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PlasticProduct;
 use App\Models\PlasticCalculatorQuestion;
 use App\Models\PlasticCalculatorMultipleChoice;
+use App\Models\Score;
 use Illuminate\Http\Request;
 
 class QuestionnaireController extends Controller
@@ -24,6 +25,7 @@ class QuestionnaireController extends Controller
             'quick_questions' => PlasticCalculatorQuestion::all(),
             'quick_choices' => PlasticCalculatorMultipleChoice::all(),
             'plastic_products' => PlasticProduct::all(),
+            'scores' => Score::all(),
             'segmentURL' => \Request::segment(3)
         ]);
     }
@@ -34,6 +36,7 @@ class QuestionnaireController extends Controller
             'quick_questions' => PlasticCalculatorQuestion::all(),
             'quick_choices' => $quick_choices,
             'plastic_products' => PlasticProduct::all(),
+            'scores' => Score::all(),
             'segmentURL' => \Request::segment(3)
         ]);
     }
