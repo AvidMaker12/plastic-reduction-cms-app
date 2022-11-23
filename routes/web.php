@@ -105,3 +105,5 @@ Route::get('/quick-calculator/results/{quick_choices:slug}', [QuickCalculatorCon
 Route::get('/questionnaire/page1', [QuestionnaireController::class, 'Question1'])->name('questionnaire.pg1')->middleware('auth');
 Route::get('/questionnaire/page2/{quick_choices:slug}', [QuestionnaireController::class, 'Question2'])->where('quick_choices', '[A-z\-]+')->name('questionnaire.pg2')->middleware('auth');
 Route::get('/questionnaire/results/{quick_choices:slug}', [QuestionnaireController::class, 'Result'])->where('quick_choices', '[A-z\-]+')->name('questionnaire.result')->middleware('auth');
+
+Route::any('insert','QuestionnaireController@InsertData');

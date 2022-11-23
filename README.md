@@ -1,3 +1,46 @@
+# Plastic Waste Reduction Web App
+
+EcoLife is a multi-page CMS web site that helps users reduce plastic products consumption by providing practical advice that is delivered in a gamified manner.
+
+# The Code: Laravel CMS using Blade PHP Views
+
+A few notes regarding the CMS:
+
+The CMS uses the public storage driver, make sure to update the .env file to:
+
+```
+FILESYSTEM_DRIVER=public
+```
+
+To create the symbolic link, use the storage:link Artisan command:
+
+```
+php artisan storage:link
+```
+
+The database setup includes migrations and seeding. Run the following command to initialize the database:
+
+```
+php artisan migrate:refresh --seed
+```
+
+All user accounts will have the default password of "password".
+
+Hosting: Ensure the following files are updated with the hosting site's connection information:
+- .env file
+- questionnaireJSON.php (found at public/JS/questionnaireJSON.php)
+
+## Requirements:
+
+* [Visual Studio Code](https://code.visualstudio.com/) or [Brackets](http://brackets.io/) (or any code editor)
+* [Laravel](https://laravel.com/)
+
+
+
+---------------------------------------------------------------------------------------
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

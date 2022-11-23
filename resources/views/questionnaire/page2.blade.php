@@ -8,6 +8,7 @@
     <section class="container">
 
         <h1 class="h4 d-flex justify-content-center">{{ __('Plastic Reduction Questionnaire') }}</h1>
+        <h3 class="h4 d-flex justify-content-center" id="scoreCategory" data-category="<?= $segmentURL ?>">{{ __('Category:') }} <?= $segmentURL ?></h1>
         <br>
         <?php foreach($quick_questions as $quick_question): ?>
             <?php if($quick_question->id == 2): ?>
@@ -16,7 +17,7 @@
         <?php endforeach; ?>
 
         <div class="mt-5">
-            <form method="get" action="<?= route('questionnaire.result',$segmentURL)?>" name="quickCalculatorForm" novalidate class="form-horizontal" enctype="multipart/form-data">
+            <form method="get" action="<?= route('questionnaire.result',$segmentURL)?>" name="quickCalculatorForm" id="quickCalculatorForm" novalidate class="form-horizontal" enctype="multipart/form-data">
                 <?= csrf_field() ?>
                 <!-- Logic for listing relevant categories that matches question 1 selected choice. -->
                 <?php foreach($quick_choices as $quick_choice): ?>
@@ -25,7 +26,7 @@
                         <?php foreach($plastic_products as $plastic): ?>
                             <?php if($plastic->category == $quick_choice->choice): ?> <!-- If the category names match, then output respective plastic products. -->
                                 <div class="form-check">
-                                    <input class="btn-check" type="checkbox" value="<?= old($plastic->plastic_product_name) ?>" id="btn-check<?= $plastic->id ?>" autocomplete="off" role="button">
+                                    <input class="btn-check" type="checkbox" value="<?= old($plastic->plastic_product_name) ?>" id="btn-check<?= $plastic->id ?>" name="btn-check<?= $plastic->id ?>" autocomplete="off" role="button">
                                     <label class="btn btn-outline-primary btn-lg" for="btn-check<?= $plastic->id ?>"><b><?= $plastic->plastic_product_name ?></b></label>
                                     <br>
                                     <h5 class="mt-4">Description:</h5>
@@ -47,6 +48,11 @@
                         <?php endforeach; ?>
                     <?php endif; ?>
                 <?php endforeach; ?>
+
+                <!-- Hidden inputs for questionnaire calculator score form submission -->
+                <input type="hidden" value="" id="scoreSet" name="score">
+                <input type="hidden" value="" id="scorePercentSet" name="score_percent">
+                <input type="hidden" value="" id="scoreCategorySet" name="score_category">
 
                 <div class="d-flex justify-content-between">
                     <a href="<?= route('quick_calculator.pg1') ?>" class="btn btn-outline-dark" role="button"><i class="bi bi-chevron-left"></i> {{ __('Back') }}</a>

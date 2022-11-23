@@ -34,7 +34,6 @@
         <!--DELETE COOKIES: Delete after debug complete.-->
 	    <!-- <p><input type="button" id="btnDel" value="Delete your Stored Information" /></p> -->
 
-
     </section>
 @endsection
 

@@ -21,6 +21,7 @@ function pageLoad() {
     var inputElements = document.getElementsByTagName("input"); // Array of input elements inside form.
     // alert("inputElements = " + inputElements.item(3).id);
 
+
     //==== LOGIC ====
 
     // Function for form submission/processing:
@@ -43,60 +44,108 @@ function pageLoad() {
             }
 
             //---TOTAL POINTS VALIDATION---
-            if (inputElements[i].id == "") { // Checks and removes <input> elements where id="" (ex. CSRF form validation hidden input has empty string for id).
+            if (inputElements[i].id == "" || !inputElements[i].id || inputElements[i].type == "hidden") { // Filters out <input> elements to only count visible form inputs with id attributes (ex. ignore CSRF form validation as it is a hidden input with id="").
                 totalPoints -= 1;
             }
 	    } // End of for loop.
 
 
+
         //==== FORM SUBMISSION TASKS ====
 
-        //---LOCAL STORAGE---
-        // LocalStorage: Create/store values:
-        localStorage.setItem("quickResult", score); // Stores user's score from Quick Calculator results.
-        localStorage.setItem("totalPoints", totalPoints); // Stores total available points from page2 to calculate final score.
-        
-        // LocalStorage: create variables using stored values:
-        var LS_quickResult = localStorage.getItem("quickResult"); // Local variable.
-        var LS_totalPoints = localStorage.getItem("totalPoints"); // Local variable.
-        
-        // LocalStorage: validation:
-        if (!LS_quickResult){
-            console.error("LocalStorage: quickResult is undefined/null.");
-            console.error("LocalStorage: quickResult = " + LS_quickResult);
-        } else {
-            console.log("LocalStorage: quickResult = " + LS_quickResult);
-            console.log("Score = " + score);
-        }
+        //--- Calculate score percentage ---
+        var scorePercent = Math.round(score / totalPoints * 100);
 
-        if (!LS_totalPoints){
-            console.error("LocalStorage: totalPoints is undefined/null.");
-            console.error("LocalStorage: totalPoints = " + LS_totalPoints);
-        } else {
-            console.log("LocalStorage: totalPoints = " + LS_totalPoints);
-            console.log("Score = " + score);
-        }
+        //--- Retrieve questionnaire category from DOM ---
+        var scoreCategory = document.getElementById("scoreCategory").dataset.category;
 
+        //--- Create object to store questionnaire score info into localStorage ---
+        var questionnaireScore = {
+            score: score,
+            score_percent: scorePercent,
+            score_category: scoreCategory,
+            total_points: totalPoints
+        };
+
+        //--- Make the object legible in preparation for storing in localStorage ---
+        let questionnaireScore_serialized = JSON.stringify(questionnaireScore);
+
+        //--- LocalStorage: Create/store values ---
+        localStorage.setItem("questionnaireScore", questionnaireScore_serialized);
+        
+        //--- LocalStorage: create variables using stored values ---
+        var LS_score = JSON.parse(localStorage.getItem("questionnaireScore")); // Local variable. Deserialized object for use in JS.
+
+
+
+        //--- Insert data into hidden inputs to submit with rest of form data ---
+        let scoreSet = document.getElementById("scoreSet");
+        let scorePercentSet = document.getElementById("scorePercentSet");
+        let scoreCategorySet = document.getElementById("scoreCategorySet");
+
+        //--- Set hidden scoreSet form input value to object value ---
+        scoreSet.value = questionnaireScore.score; // Upon form submission, hidden input will send JS data to controller via request, to then save to database.
+        scorePercentSet.value = questionnaireScore.score_percent; // Upon form submission, hidden input will send JS data to controller via request, to then save to database.
+        scoreCategorySet.value = questionnaireScore.score_category; // Upon form submission, hidden input will send JS data to controller via request, to then save to database.
+        // scoreSet.innerText = questionnaireScore.score;
+
+
+
+        //==== AJAX ====
+
+        // $(document).ready(function() {
+        //     $("#quickCalculatorForm").on("submit", function(s) {
+        //         s.preventdefault();
+        //         $.ajax({
+        //             url:"insert", // Refer to routes pg 'insert' function , which calls upon QuestionnaireController InsertData function.
+        //             type:"POST",
+        //             data:$("#quickCalculatorForm").serialize(),
+        //             success:function() {
+        //                 console.log("Questionnaire data successfully saved to database.");
+        //             },
+        //             error:function(e) {
+        //                 console.log(e);
+        //             }
+        //         });
+        //     });
+        // });
+
+
+        //--- Make the JSON object accessible to PHP via AJAX ---
+        $.ajax({
+            url: "questionnaireJSON.php",
+            method: "post",
+            data:  { questionnaireScore: JSON.stringify(questionnaireScore) }, // Serialize object to be legible for console.log success function.
+            success: function(res) {
+                console.log("Successfully inserted questionnaire score data. " + res);
+            },
+            error:function(e) {
+                console.log(e);
+            }
+        })
         
     } // End of function formProcess.
 
-    // LocalStorage: Retrieve stored stored values:
-    var LS_quickResult = localStorage.getItem("quickResult"); // This is useful for when navigating back to home page and ensuring user input data persist, if needed.
-    var LS_totalPoints = localStorage.getItem("totalPoints")
 
-    // Function: Delete local storage values:
+    // LocalStorage: Retrieve stored values for page onload function:
+    var LS_score = localStorage.getItem("questionnaireScore"); // This is useful for when navigating back to home page and ensuring user input data persist, if needed.
+
+    // --- Delete local storage values ---
     // function localStorageDel() {
     //     // Local storage: delete specified items:
-    //     localStorage.removeItem("quickResult"); // localStorage.clear not used in case other local storage items needs to be kept.
+    //     localStorage.removeItem("score"); // localStorage.clear not used in case other local storage items needs to be kept.
     // }
 
 
+    //==== EVENT LISTENERS ====
+    
     // Event listener for button:
     formListener.onsubmit = formProcess;
     // alert("Form validation test before loading next page"); // Comment-out this line upon successful test.
 
     // LocalStorage: Delete storage data:
     // btnDel.onclick = localStorageDel; // Delete localStorage stored info upon button click, resets page welcome text and background color to default.
+
 
 } // End onload function.
 
