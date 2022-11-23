@@ -17,7 +17,7 @@
         <?php endforeach; ?>
 
         <div class="mt-5">
-            <form method="get" action="<?= route('questionnaire.result',$segmentURL)?>" name="quickCalculatorForm" id="quickCalculatorForm" novalidate class="form-horizontal" enctype="multipart/form-data">
+            <form method="post" action="<?= route('questionnaire.resultProcess',$segmentURL)?>" name="quickCalculatorForm" id="quickCalculatorForm" novalidate class="form-horizontal" enctype="multipart/form-data">
                 <?= csrf_field() ?>
                 <!-- Logic for listing relevant categories that matches question 1 selected choice. -->
                 <?php foreach($quick_choices as $quick_choice): ?>

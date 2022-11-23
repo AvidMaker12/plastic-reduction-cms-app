@@ -32,7 +32,7 @@ class QuestionnaireController extends Controller
         ]);
     }
 
-    public function Result(PlasticCalculatorMultipleChoice $quick_choices)
+    public function ResultProcess(PlasticCalculatorMultipleChoice $quick_choices)
     {
         $attributes = request()->validate([
             'score' => 'required',
@@ -46,19 +46,26 @@ class QuestionnaireController extends Controller
         $scores->score_category = $attributes['score_category'];
         $scores->user_id = Auth::user()->id;
         $scores->save();
-        
+
+        return redirect(route('questionnaire.result', [
+            'quick_questions' => PlasticCalculatorQuestion::all(),
+            'quick_choices' => $quick_choices,
+            'plastic_products' => PlasticProduct::all(),
+            'scores' => Score::all(),
+            'segmentURL' => \Request::segment(3)
+        ]));
+    }
+
+    public function Result(PlasticCalculatorMultipleChoice $quick_choices)
+    {
         return view('questionnaire.result', [
             'quick_questions' => PlasticCalculatorQuestion::all(),
             'quick_choices' => $quick_choices,
             'plastic_products' => PlasticProduct::all(),
             'scores' => Score::all(),
             'segmentURL' => \Request::segment(3)
-        ]);
+        ])
+            ->with('message', 'Your score has been saved.');
     }
 
-    public function InsertData(Request $request, Score $scores)
-    {
-        $scores = new Score();
-        $scores->score = $request->score;
-    }
 }

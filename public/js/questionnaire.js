@@ -89,41 +89,6 @@ function pageLoad() {
         scoreCategorySet.value = questionnaireScore.score_category; // Upon form submission, hidden input will send JS data to controller via request, to then save to database.
         // scoreSet.innerText = questionnaireScore.score;
 
-
-
-        //==== AJAX ====
-
-        // $(document).ready(function() {
-        //     $("#quickCalculatorForm").on("submit", function(s) {
-        //         s.preventdefault();
-        //         $.ajax({
-        //             url:"insert", // Refer to routes pg 'insert' function , which calls upon QuestionnaireController InsertData function.
-        //             type:"POST",
-        //             data:$("#quickCalculatorForm").serialize(),
-        //             success:function() {
-        //                 console.log("Questionnaire data successfully saved to database.");
-        //             },
-        //             error:function(e) {
-        //                 console.log(e);
-        //             }
-        //         });
-        //     });
-        // });
-
-
-        //--- Make the JSON object accessible to PHP via AJAX ---
-        $.ajax({
-            url: "questionnaireJSON.php",
-            method: "post",
-            data:  { questionnaireScore: JSON.stringify(questionnaireScore) }, // Serialize object to be legible for console.log success function.
-            success: function(res) {
-                console.log("Successfully inserted questionnaire score data. " + res);
-            },
-            error:function(e) {
-                console.log(e);
-            }
-        })
-        
     } // End of function formProcess.
 
 
