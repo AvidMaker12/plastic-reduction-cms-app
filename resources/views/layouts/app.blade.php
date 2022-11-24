@@ -68,7 +68,7 @@
                                     </a>
 
                                     <!-- Settings Dropdown Link: -->
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ route('client_user_account.list') }}">
                                         {{ __('Settings') }}
                                     </a>
 

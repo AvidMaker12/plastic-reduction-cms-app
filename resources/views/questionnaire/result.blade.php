@@ -29,6 +29,7 @@
 
         <div class="d-flex justify-content-between">
             <a href="<?= route('questionnaire.pg2',$segmentURL) ?>" class="btn btn-outline-dark" role="button"><i class="bi bi-chevron-left"></i> {{ __('Back') }}</a>
+            <a href="<?= route('user.home') ?>" class="btn btn-outline-dark" role="button">{{ __('Return to Dashboard') }} <i class="bi bi-chevron-right"></i></a>
         </div>
 
         <!--DELETE COOKIES: Delete after debug complete.-->

@@ -8,6 +8,7 @@ use App\Http\Controllers\PlasticCalculatorQuestionController;
 use App\Http\Controllers\PlasticCalculatorMultipleChoiceController;
 use App\Http\Controllers\QuickCalculatorController;
 use App\Http\Controllers\QuestionnaireController;
+use App\Http\Controllers\ClientAccountController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -25,15 +26,13 @@ use Illuminate\Support\Facades\Route;
 // HOME PAGE
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
 
 Auth::routes();
 
-// USER LOGIN DASHBOARD
-Route::get('/home', [HomeController::class, 'index'])->name('user.home')->middleware('auth');
-
 // ADMIN CONSOLE CMS DASHBOARD
 Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin'); // 'is_admin' created in Middleware Kernal.php
+
 
 // CONSOLE ADMINS CMS PAGES
 Route::get('/admin/admins', [AdminController::class, 'list'])->name('admin.list')->middleware('is_admin');
@@ -107,3 +106,12 @@ Route::get('/questionnaire/page2/{quick_choices:slug}', [QuestionnaireController
 Route::post('/questionnaire/results/{quick_choices:slug}', [QuestionnaireController::class, 'ResultProcess'])->where('quick_choices', '[A-z\-]+')->name('questionnaire.resultProcess')->middleware('auth');
 Route::get('/questionnaire/results/{quick_choices:slug}', [QuestionnaireController::class, 'Result'])->where('quick_choices', '[A-z\-]+')->name('questionnaire.result')->middleware('auth');
 
+
+// USER LOGIN DASHBOARD
+Route::get('/home', [HomeController::class, 'userHome'])->name('user.home')->middleware('auth');
+
+// USER DASHBOARD ACCOUNT SETTINGS
+Route::get('/home/settings', [ClientAccountController::class, 'list'])->name('client_user_account.list')->middleware('auth');
+Route::post('/home/settings/edit/{user:id}', [ClientAccountController::class, 'edit'])->where('user', '[0-9]+')->name('client_user_account.edit')->middleware('auth');
+Route::post('/home/settings/delete/{user:id}', [ClientAccountController::class, 'delete'])->where('user', '[0-9]+')->name('client_user_account.delete')->middleware('auth');
+Route::post('/home/settings/image/{user:id}', [ClientAccountController::class, 'image'])->where('user', '[0-9]+')->name('client_user_account.image')->middleware('auth');

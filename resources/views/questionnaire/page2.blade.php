@@ -56,7 +56,7 @@
 
                 <div class="d-flex justify-content-between">
                     <a href="<?= route('quick_calculator.pg1') ?>" class="btn btn-outline-dark" role="button"><i class="bi bi-chevron-left"></i> {{ __('Back') }}</a>
-                    <button type="submit" class="btn btn-success" aria-label="{{ __('Submit plastic calculator form to check results') }}">{{ __('Next') }}</button>
+                    <button type="submit" class="btn btn-success" aria-label="{{ __('Submit plastic calculator form to check results') }}">{{ __('Next') }} <i class="bi bi-chevron-right"></i></button>
                 </div>
             </form>
         </div>

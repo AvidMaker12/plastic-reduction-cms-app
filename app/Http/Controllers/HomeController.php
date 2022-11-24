@@ -17,11 +17,11 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the client/user's dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function userHome()
     {
         $pageTitle = 'EcoLife Plastic Waste Reduction App';
         // return view('welcome', compact('pageTitle'));
@@ -29,7 +29,8 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function adminHome(){
+    public function adminHome()
+    {
         return view('console.dashboard');
     }
 }
