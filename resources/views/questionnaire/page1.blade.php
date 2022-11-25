@@ -7,7 +7,7 @@
 @section('content')
     <section class="container">
 
-        <h1 class="h4 d-flex justify-content-center">{{ __('Plastic Reduction Questionnaire') }}</h1>
+        <h1 class="h4 d-flex justify-content-center">{{ __('Plastic Waste Questionnaire') }}</h1>
         <br>
         <p class="h3 mb-5 d-flex justify-content-center">Let's begin by selecting a category.</p>
         <?php if($quick_questions->id == 1): ?>
