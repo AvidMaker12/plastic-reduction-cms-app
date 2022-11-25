@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -46,13 +47,13 @@ class LoginController extends Controller
             'password'=>'required',
         ]);
 
-        if(auth()->attempt(array('email'=>$input['email'], 'password'=>$input['password']))){ // If auth attempt is true then successful login.
+        if(auth()->attempt(array('email'=>$input['email'], 'password'=>$input['password']))) { // If auth attempt is true then successful login.
             if(auth()->user()->is_admin == 1){
                 return redirect()->route('admin.home'); // Route name from web.php
-            }else{
+            }else {
                 return redirect()->route('user.home'); // Redirect to user dashboard 'home' page instead of admin console if the user is not an admin.
             }
-        }else{
+        }else {
             return redirect()->route('login')->with('error','Incorrect email and password combination.');
         }
     }

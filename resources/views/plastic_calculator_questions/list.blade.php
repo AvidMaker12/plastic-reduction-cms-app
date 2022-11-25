@@ -11,7 +11,7 @@
             <a href="<?= route('plastic_calculator_question.add') ?>" class="btn btn-success" role="button" aria-label="{{ __('Add New Plastic Calculator Question') }}">{{ __('Add New Question') }}</a>
         </div>
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover table-responsive">
+            <table class="table table-striped table-bordered table-hover">
                 <thead>
                     <tr class="table-primary">
                         <th scope="col">{{ __('ID') }}</th>
@@ -69,7 +69,7 @@
                                                     <!-- Multiple Choice Icon -->
                                                     <td>
                                                         <?php if($multiple_choice->icon): ?>
-                                                            <img src="<?= asset('storage/'.$multiple_choice->icon) ?>" height="50" alt="{{ __('Plastic calculator multiple choice icon') }}">
+                                                            <img src="<?= asset('storage/'.$multiple_choice->icon) ?>" height="30" alt="{{ __('Plastic calculator multiple choice icon') }}">
                                                         <?php else: ?>
                                                             <h2><i class="bi bi-card-image" alt="{{ __('Icon placeholder') }}"></i></h2>
                                                         <?php endif; ?>

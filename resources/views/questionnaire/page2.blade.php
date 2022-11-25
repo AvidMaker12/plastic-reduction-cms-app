@@ -53,6 +53,7 @@
                 <input type="hidden" value="" id="scoreSet" name="score">
                 <input type="hidden" value="" id="scorePercentSet" name="score_percent">
                 <input type="hidden" value="" id="scoreCategorySet" name="score_category">
+                <input type="hidden" value="" id="scoreTotalPointSet" name="total_point">
 
                 <div class="d-flex justify-content-between">
                     <a href="<?= route('quick_calculator.pg1') ?>" class="btn btn-outline-dark" role="button"><i class="bi bi-chevron-left"></i> {{ __('Back') }}</a>

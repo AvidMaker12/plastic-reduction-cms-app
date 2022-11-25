@@ -36,12 +36,14 @@ class QuestionnaireController extends Controller
     {
         $attributes = request()->validate([
             'score' => 'required',
+            'total_point' => 'required',
             'score_percent' => 'required',
             'score_category' => 'required',
         ]);
         
         $scores = new Score();
         $scores->score = $attributes['score'];
+        $scores->total_point = $attributes['total_point'];
         $scores->score_percent = $attributes['score_percent'];
         $scores->score_category = $attributes['score_category'];
         $scores->user_id = Auth::user()->id;

@@ -64,7 +64,7 @@ function pageLoad() {
             score: score,
             score_percent: scorePercent,
             score_category: scoreCategory,
-            total_points: totalPoints
+            total_point: totalPoints
         };
 
         //--- Make the object legible in preparation for storing in localStorage ---
@@ -78,15 +78,19 @@ function pageLoad() {
 
 
 
+        //==== SAVE JAVASCRIPT DATA TO 'SCORES' TABLE IN DATABASE ====
+
         //--- Insert data into hidden inputs to submit with rest of form data ---
         let scoreSet = document.getElementById("scoreSet");
         let scorePercentSet = document.getElementById("scorePercentSet");
         let scoreCategorySet = document.getElementById("scoreCategorySet");
+        let scoreTotalPointSet = document.getElementById("scoreTotalPointSet");
 
         //--- Set hidden scoreSet form input value to object value ---
         scoreSet.value = questionnaireScore.score; // Upon form submission, hidden input will send JS data to controller via request, to then save to database.
         scorePercentSet.value = questionnaireScore.score_percent; // Upon form submission, hidden input will send JS data to controller via request, to then save to database.
         scoreCategorySet.value = questionnaireScore.score_category; // Upon form submission, hidden input will send JS data to controller via request, to then save to database.
+        scoreTotalPointSet.value = questionnaireScore.total_point; // Upon form submission, hidden input will send JS data to controller via request, to then save to database.
         // scoreSet.innerText = questionnaireScore.score;
 
     } // End of function formProcess.

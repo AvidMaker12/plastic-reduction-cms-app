@@ -27,7 +27,7 @@
                             </li>
                             <li class="list-group-item list-group-item-action ms-2">
                                 <p class="card-text mt-2">Check out your current and past plastic reduction scores.</p>
-                                <a href="#" class="btn btn-success" role="button" aria-label={{ __('User plastic reduction scores statistics page') }}">{{ __('Statistics') }}</a>
+                                <a href="<?= route('client_user_account.stats') ?>" class="btn btn-success" role="button" aria-label={{ __('Statistics page showing plastic reduction questionnaire scores') }}">{{ __('Statistics') }}</a>
                             </li>
                         </ul>
                     </div>

@@ -28,8 +28,8 @@ function pageLoad() {
         console.error("LocalStorage: LS_score = " + JSON.stringify(LS_score));
     } else {
         console.log("LocalStorage: LS_score = " + JSON.stringify(LS_score));
-        console.log("Score / Total Points = " + LS_score.score + "/" + LS_score.total_points);
-        // console.log("Score Total Points = " + LS_score.total_points);
+        console.log("Score / Total Points = " + LS_score.score + "/" + LS_score.total_point);
+        // console.log("Score Total Points = " + LS_score.total_point);
         console.log("Score Percent = " + LS_score.score_percent);
         console.log("Score Category = " + LS_score.score_category);
     }
@@ -41,21 +41,21 @@ function pageLoad() {
     //     localStorage.removeItem("quickResult"); // localStorage.clear not used in case other local storage items needs to be kept.
     // }
 
-    //OUTPUT
+    //--- OUTPUT ---
     if (LS_score.score_percent == 100) { // Custom message when score is 100%.
         scoreMsgBox.innerHTML = "<i class='bi bi-brightness-high'></i>&nbsp;&nbsp; Amazing!!! Your score is " + LS_score.score_percent + "% ! &nbsp;&nbsp;<i class='bi bi-brightness-high'></i>";
-        scoreSummaryMsgBox.innerHTML = "You have replaced " + LS_score.score + "/" + LS_score.total_points + " products with non-plastic alternatives.";
+        scoreSummaryMsgBox.innerHTML = "You have replaced " + LS_score.score + "/" + LS_score.total_point + " products with non-plastic alternatives.";
         console.log("User score (LS_score): " + JSON.stringify(LS_score));
     } else if (LS_score.score_percent >= 50) { // Custom message when score is greater than 50%.
         scoreMsgBox.innerHTML = "Congrats! Your score is " + LS_score.score_percent + "%";
-        scoreSummaryMsgBox.innerHTML = "You have replaced " + LS_score.score + "/" + LS_score.total_points + " products with non-plastic alternatives.";
+        scoreSummaryMsgBox.innerHTML = "You have replaced " + LS_score.score + "/" + LS_score.total_point + " products with non-plastic alternatives.";
         console.log("User score (LS_score): " + JSON.stringify(LS_score));
     } else if (LS_score.score_percent < 50) { // Custom message when score is between 0 and 50%.
         scoreMsgBox.innerHTML = "Your score is " + LS_score.score_percent + "%";
-        scoreSummaryMsgBox.innerHTML = "You have replaced " + LS_score.score + "/" + LS_score.total_points + " products with non-plastic alternatives.";
+        scoreSummaryMsgBox.innerHTML = "You have replaced " + LS_score.score + "/" + LS_score.total_point + " products with non-plastic alternatives.";
     } else if (LS_score.score_percent == 0) { // Custom message when score is equal to 0.
         scoreMsgBox.innerHTML = "Your score is " + LS_score.score_percent + "%";
-        scoreSummaryMsgBox.innerHTML = "You have replaced " + LS_score.score + "/" + LS_score.total_points + " products with non-plastic alternatives.";
+        scoreSummaryMsgBox.innerHTML = "You have replaced " + LS_score.score + "/" + LS_score.total_point + " products with non-plastic alternatives.";
     } else if (!LS_score) {
         //VALIDATION: LOCAL STORAGE
         console.log("Local storage 'LS_score' is undefined/null.");

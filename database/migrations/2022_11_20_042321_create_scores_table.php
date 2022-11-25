@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('scores', function (Blueprint $table) {
             $table->id();
             $table->integer('score');
+            $table->integer('total_point');
             $table->integer('score_percent');
             $table->string('score_category');
             $table->foreignId('user_id');

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\PlasticProduct;
+use App\Models\PlasticCalculatorQuestion;
+use App\Models\PlasticCalculatorMultipleChoice;
+use App\Models\Score;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -65,5 +69,15 @@ class ClientAccountController extends Controller
         
         return redirect(route('client_user_account.list'))
             ->with('message', 'Profile picture has been saved.');
+    }
+
+    public function stats(User $user)
+    {
+        return view('client_user_account.stats', [
+            'plastic_calculator_questions' => PlasticCalculatorQuestion::all(),
+            'plastic_calculator_multiple_choices' => PlasticCalculatorMultipleChoice::all(),
+            'users' => $user,
+            'scores' => Score::all()
+        ]); 
     }
 }

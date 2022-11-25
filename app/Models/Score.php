@@ -16,6 +16,7 @@ class Score extends Model
      */
     protected $fillable = [
         'score',
+        'total_point',
         'score_percent',
         'score_category',
         'user_id',

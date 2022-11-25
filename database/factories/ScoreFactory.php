@@ -20,7 +20,8 @@ class ScoreFactory extends Factory
     {
         return [
             // Notes: No columns related to 'id', 'images', 'timestamps' are listed here.
-            'score' => fake()->numberBetween(0, 10), // Ex. Scored 5 out of total available points.
+            'score' => fake()->numberBetween(0, 10), // Ex. Scored 5 out of 10 total available points.
+            'total_point' => fake()->numberBetween(0, 10), // Ex. 10 total available points to score.
             'score_percent' => fake()->numberBetween(0, 100), // Ex. Scored 50% for 'Home' category of plastic reduction calculator.
             'score_category' => fake()->word(), // Ex. 'Home' category from plastic reduction calculator.
             'user_id' => User::all()->random(),
