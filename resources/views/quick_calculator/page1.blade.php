@@ -17,8 +17,11 @@
         <div class="mt-4">
             <?php foreach($quick_choices as $quick_choice): ?>
                 <?php if($quick_choice->plastic_calculator_question_id == 1): ?> <!-- Only show list of question1 choices: 'Home', 'Workplace', 'Travel'. -->
-                    <div class="d-flex justify-content-center">
-                        <a href="<?= route('quick_calculator.pg2',[$quick_choice->slug]) ?>" class="btn btn-success mb-1" role="button"><?= $quick_choice->choice ?></a>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <?php if($quick_choice->icon): ?>
+                            <img src="<?= asset('storage/'.$quick_choice->icon) ?>" height="25" alt="{{ __('Plastic calculator multiple choice icon') }}">
+                        <?php endif; ?>
+                        <a href="<?= route('quick_calculator.pg2',[$quick_choice->slug]) ?>" class="btn btn-success ms-3" role="button"><?= $quick_choice->choice ?></a>
                     </div>
                     <br><br>
                 <?php endif; ?>

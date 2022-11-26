@@ -100,7 +100,7 @@ class PlasticProductController extends Controller
     public function icon(PlasticProduct $plastic_product)
     {
         $attributes = request()->validate([
-            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         if($plastic_product->icon){
@@ -125,7 +125,7 @@ class PlasticProductController extends Controller
     public function image(PlasticProduct $plastic_product)
     {
         $attributes = request()->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         if($plastic_product->image){

@@ -22,7 +22,13 @@
                 <!-- Logic for listing relevant categories that matches question 1 selected choice. -->
                 <?php foreach($quick_choices as $quick_choice): ?>
                     <?php if($quick_choice->plastic_calculator_question_id == 2 && $segmentURL == $quick_choice->choice_category): ?>
-                        <h3 class="mb-4"><b><?= $quick_choice->choice ?></b></h2> <!-- Room category names for plastic products. Ex. Kitchen, Restroom, Office. -->
+                        <div class="d-flex align-items-center mb-4">
+                            <?php if($quick_choice->icon): ?>
+                                <img src="<?= asset('storage/'.$quick_choice->icon) ?>" height="35" alt="{{ __('Plastic calculator multiple choice icon') }}">
+                            <?php endif; ?>
+                            <h3 class="h1 m-0 ms-3"><b><?= $quick_choice->choice ?></b></h2> <!-- Room category names for plastic products. Ex. Kitchen, Restroom, Office. -->
+                        </div>
+                        <hr>
                         <?php foreach($plastic_products as $plastic): ?>
                             <?php if($plastic->category == $quick_choice->choice): ?> <!-- If the category names match, then output respective plastic products. -->
                                 <div class="form-check">
@@ -37,7 +43,7 @@
                             
                                 <div class="mb-2">
                                     <?php if($plastic->image): ?>
-                                        <img src="<?= asset('storage/'.$plastic->image) ?>" height="200">
+                                        <img src="<?= asset('storage/'.$plastic->image) ?>" height="200" class="float-end">
                                     <?php endif; ?>
                                 </div>
 

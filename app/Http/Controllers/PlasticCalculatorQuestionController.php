@@ -162,7 +162,7 @@ class PlasticCalculatorQuestionController extends Controller
     public function icon(PlasticCalculatorQuestion $plastic_calculator_question)
     {
         $attributes = request()->validate([
-            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         if($plastic_calculator_question->icon){
@@ -180,7 +180,7 @@ class PlasticCalculatorQuestionController extends Controller
     public function iconChoice(PlasticCalculatorQuestion $plastic_calculator_question, PlasticCalculatorMultipleChoice $multiple_choice)
     {
         $attributes = request()->validate([
-            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'question_id' => 'required',
         ]);
 
@@ -209,7 +209,7 @@ class PlasticCalculatorQuestionController extends Controller
     public function image(PlasticCalculatorQuestion $plastic_calculator_question)
     {
         $attributes = request()->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         if($plastic_calculator_question->image){
