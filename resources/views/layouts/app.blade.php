@@ -7,23 +7,27 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>EcoLife | @yield('title')</title>
+    <title>@yield('title') - {{ __('EcoLife') }}</title>
     <!-- <title>{{ config('app.name', 'Laravel') }}</title> -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"> <!-- Bootstrap Icons -->
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
+    <a href="top" class="visually-hidden" aria-hidden="true"></a> <!-- 'Back To Top' page link. -->
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
-                    EcoLife
+                    {{ __('EcoLife') }}
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -59,17 +63,18 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <!-- Settings Dropdown Link: -->
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('user.home') }}">
+                                        {{ __('Dashboard') }}
+                                    </a>
+
+                                    <!-- Settings Dropdown Link: -->
+                                    <a class="dropdown-item" href="{{ route('client_user_account.list') }}">
                                         {{ __('Settings') }}
-                                        
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-
                                     <!-- Logout Dropdown Link: -->
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -91,24 +96,20 @@
         <!-- Page status messages.
              Example: "New Plastic Product has successfully been added." -->
         @if(session()->has('message'))
-            <div class="card-body">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> <!-- Alert message close button. -->
-                <div class="alert-success alert-dissmissable fade in"><?= session()->get('message') ?></div>
-            </div>
-         @endif
-
-        <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
+            <div class="container">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></button> <!-- Alert message close button. -->
+                    <?= session()->get('message') ?>
                 </div>
-            @endif
-        </div>
-
+            </div>
+        @endif
 
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+
+    @yield('scripts')
+    
 </body>
 </html>

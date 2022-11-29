@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\PlasticProduct;
+use App\Models\PlasticCalculatorQuestion;
+use App\Models\PlasticCalculatorMultipleChoice;
+use App\Models\Score;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,6 +21,10 @@ class DatabaseSeeder extends Seeder
     {
         // Empty tables upon 'migrate refresh' command to prevent continuously adding to seeded data. //
         User::truncate();
+        PlasticProduct::truncate(); // Table foreign keys connections: users
+        PlasticCalculatorQuestion::truncate(); // Table foreign keys connections: users
+        PlasticCalculatorMultipleChoice::truncate(); // Table foreign keys connections: users, plastic_calculator_questions
+        Score::truncate(); // Table foreign keys connections: users
 
         
         // Seed data to tables. //
@@ -25,7 +33,10 @@ class DatabaseSeeder extends Seeder
         */
         
         User::factory()->count(4)->create();
-
+        PlasticProduct::factory()->count(4)->create(); // Table foreign keys connections: users
+        PlasticCalculatorQuestion::factory()->count(3)->create(); // Table foreign keys connections: users
+        PlasticCalculatorMultipleChoice::factory()->count(7)->create(); // Table foreign keys connections: users, plastic_calculator_questions
+        Score::factory()->count(4)->create(); // Table foreign keys connections: users
 
         
         // \App\Models\User::factory(10)->create();
