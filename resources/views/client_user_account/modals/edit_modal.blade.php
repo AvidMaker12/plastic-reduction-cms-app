@@ -1,25 +1,16 @@
-@extends('layouts_console.app_console')
-
-@section('title') {{ __('Users') }} @endsection <!-- Dynamic page tab title. -->
-
-@section('content')
-
-    <section class="container">
-
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">{{ __('Edit User') }}</h2>
-                <p class="card-text"><?= $user->username ?></p>
-            </div>
-
-            <div class="card-body">
-                <form method="post" action="<?= route('user.edit',[$user->id])?>" novalidate class="form-horizontal" enctype="multipart/form-data">
-
-                    <?= csrf_field() ?>
-
-                    <div class="mb-4 mt-2">
+<form method="post" action="<?= route('client_user_account.edit',[$user->id])?>" novalidate class="form-horizontal" enctype="multipart/form-data">
+    <?= csrf_field() ?>
+    <div class="modal fade" id="modalEdit{{ $user->id }}" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true" area-labelledby="modalEditTitle{{ $user->id }}" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalEditTitle{{ $user->id }}" ><i class="bi bi-gear-fill me-2"></i> {{ __('Edit') }}</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ __('Close') }}"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-4">
                         <label for="username" class="form-label">{{ __('Username:') }}</label>
-                        <input type="text" name="username" id="f_name" value="<?= old('username', $user->username) ?>" required class="form-control">
+                        <input type="text" name="username" id="username" value="<?= old('username', $user->username) ?>" required class="form-control">
                         <?php if($errors->first('username')): ?>
                             <br>
                             <span class="text-danger"><?= $errors->first('username'); ?></span>
@@ -27,7 +18,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="email" class="form-label">{{ __('Email:') }}</label>
+                        <label for="email" class="form-label">{{ __('E-mail:') }}</label>
                         <input type="text" name="email" id="email" value="<?= old('email', $user->email) ?>" required class="form-control">
                         <?php if($errors->first('email')): ?>
                             <br>
@@ -44,16 +35,12 @@
                         <?php endif; ?>
                         <div id="passwordHelp" class="form-text">{{ __('Note: Password must be at least 8 characters long.') }}</div>
                     </div>
-
-                    <button type="submit" class="btn btn-success mb-3">{{ __('Edit User') }}</button>
-
-                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" aria-label="{{ __('Edit profile') }}">{{ __('Save') }}</button>
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                </div>
             </div>
         </div>
-
-        <br>
-        <a href="<?= route('user.list') ?>" class="btn btn-outline-dark" role="button"><i class="bi bi-chevron-left"></i> {{ __('Back to User List') }}</a>
-
-    </section>
-
-@endsection
+    </div>
+</form>

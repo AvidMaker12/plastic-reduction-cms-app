@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title') {{'Quick Calculator'}} @endsection <!-- Dynamic page tab title. -->
+@section('title') {{'Questionnaire'}} @endsection <!-- Dynamic page tab title. -->
 
 @section('styles') <link rel="stylesheet" href="{{ asset('/css/quick-questionnaire.css') }}"> @endsection <!-- Dynamic page styles. -->
 
 @section('content')
     <section class="container">
 
-        <h1 class="h4 d-flex justify-content-center">{{ __('Plastic Waste Calculator') }}</h1>
+        <h1 class="h4 d-flex justify-content-center">{{ __('Plastic Waste Questionnaire') }}</h1>
         <br>
         <p class="h3 mb-5 d-flex justify-content-center">Let's begin by selecting a category.</p>
         <?php if($quick_questions->id == 1): ?>
@@ -21,7 +21,7 @@
                         <?php if($quick_choice->icon): ?>
                             <img src="<?= asset('storage/'.$quick_choice->icon) ?>" height="25" alt="{{ __('Plastic calculator multiple choice icon') }}">
                         <?php endif; ?>
-                        <a href="<?= route('quick_calculator.pg2',[$quick_choice->slug]) ?>" class="btn btn-success ms-3" role="button"><?= $quick_choice->choice ?></a>
+                        <a href="<?= route('questionnaire.pg2',[$quick_choice->slug]) ?>" class="btn btn-success ms-3" role="button"><?= $quick_choice->icon ?> <?= $quick_choice->choice ?></a>
                     </div>
                     <br><br>
                 <?php endif; ?>

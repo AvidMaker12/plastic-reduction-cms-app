@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -17,19 +19,24 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the client/user's dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function userHome(User $user)
     {
-        $pageTitle = 'EcoLife Plastic Waste Reduction App';
-        // return view('welcome', compact('pageTitle'));
-        // return view('welcome')->with('pageTitle', $pageTitle);
+        // if(Auth::user()->id == $user->id) {
+        //     $pageTitle = 'EcoLife Plastic Waste Reduction App';
+        //     // return view('welcome', compact('pageTitle'));
+        //     // return view('welcome')->with('pageTitle', $pageTitle);
+        //    return view('home',['users' => $user]);
+        // }
+
         return view('home');
     }
 
-    public function adminHome(){
+    public function adminHome()
+    {
         return view('console.dashboard');
     }
 }

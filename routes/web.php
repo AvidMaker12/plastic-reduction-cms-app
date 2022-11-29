@@ -7,6 +7,8 @@ use App\Http\Controllers\PlasticProductController;
 use App\Http\Controllers\PlasticCalculatorQuestionController;
 use App\Http\Controllers\PlasticCalculatorMultipleChoiceController;
 use App\Http\Controllers\QuickCalculatorController;
+use App\Http\Controllers\QuestionnaireController;
+use App\Http\Controllers\ClientAccountController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -24,15 +26,13 @@ use Illuminate\Support\Facades\Route;
 // HOME PAGE
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
 
 Auth::routes();
 
-// USER DASHBOARD
-Route::get('/home', [HomeController::class, 'index'])->name('user.home')->middleware('auth');
-
 // ADMIN CONSOLE CMS DASHBOARD
 Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin'); // 'is_admin' created in Middleware Kernal.php
+
 
 // CONSOLE ADMINS CMS PAGES
 Route::get('/admin/admins', [AdminController::class, 'list'])->name('admin.list')->middleware('is_admin');
@@ -73,12 +73,12 @@ Route::post('/admin/plastic_calculator_questions/add', [PlasticCalculatorQuestio
 Route::post('/admin/plastic_calculator_questions/add-choice/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'addChoice'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.addChoice')->middleware('is_admin');
 Route::get('/admin/plastic_calculator_questions/edit/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'editForm'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.edit')->middleware('is_admin');
 Route::post('/admin/plastic_calculator_questions/edit/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'edit'])->where('plastic_calculator_question', '[0-9]+')->middleware('is_admin');
-Route::post('/admin/plastic_calculator_questions/edit-choice/{multiple_choice:id}', [PlasticCalculatorQuestionController::class, 'editChoice'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.editChoice')->middleware('is_admin'); // Note: variable name inside get() curly-braces max. 32 characters.
+Route::post('/admin/plastic_calculator_questions/edit-choice/{multiple_choice:id}', [PlasticCalculatorQuestionController::class, 'editChoice'])->where('multiple_choice', '[0-9]+')->name('plastic_calculator_question.editChoice')->middleware('is_admin'); // Note: variable name inside get() curly-braces max. 32 characters.
 Route::get('/admin/plastic_calculator_questions/delete/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'delete'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.delete')->middleware('is_admin');
-Route::get('/admin/plastic_calculator_questions/delete-choice/{multiple_choice:id}', [PlasticCalculatorQuestionController::class, 'deleteChoice'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.deleteChoice')->middleware('is_admin'); // Note: variable inside get() curly-braces must match variable name used in controller function.
+Route::get('/admin/plastic_calculator_questions/delete-choice/{multiple_choice:id}', [PlasticCalculatorQuestionController::class, 'deleteChoice'])->where('multiple_choice', '[0-9]+')->name('plastic_calculator_question.deleteChoice')->middleware('is_admin'); // Note: variable inside get() curly-braces must match variable name used in controller function.
 Route::get('/admin/plastic_calculator_questions/icon/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'iconForm'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.icon')->middleware('is_admin');
 Route::post('/admin/plastic_calculator_questions/icon/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'icon'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.icon')->middleware('is_admin');
-Route::post('/admin/plastic_calculator_questions/icon-choice/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'iconChoice'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.iconChoice')->middleware('is_admin');
+Route::post('/admin/plastic_calculator_questions/icon-choice/{multiple_choice:id}', [PlasticCalculatorQuestionController::class, 'iconChoice'])->where('multiple_choice', '[0-9]+')->name('plastic_calculator_question.iconChoice')->middleware('is_admin');
 Route::get('/admin/plastic_calculator_questions/image/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'imageForm'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.image')->middleware('is_admin');
 Route::post('/admin/plastic_calculator_questions/image/{plastic_calculator_question:id}', [PlasticCalculatorQuestionController::class, 'image'])->where('plastic_calculator_question', '[0-9]+')->name('plastic_calculator_question.image')->middleware('is_admin');
 
@@ -99,3 +99,24 @@ Route::get('/admin/plastic_calculator_multiple_choices', [PlasticCalculatorMulti
 Route::get('/quick-calculator/page1', [QuickCalculatorController::class, 'quickQuestion1'])->name('quick_calculator.pg1');
 Route::get('/quick-calculator/page2/{quick_choices:slug}', [QuickCalculatorController::class, 'quickQuestion2'])->where('quick_choices', '[A-z\-]+')->name('quick_calculator.pg2');
 Route::get('/quick-calculator/results/{quick_choices:slug}', [QuickCalculatorController::class, 'quickResult'])->where('quick_choices', '[A-z\-]+')->name('quick_calculator.result');
+
+// USER PLASTIC REDUCTION QUESTIONNAIRE
+Route::get('/questionnaire/page1', [QuestionnaireController::class, 'Question1'])->name('questionnaire.pg1')->middleware('auth');
+Route::get('/questionnaire/page2/{quick_choices:slug}', [QuestionnaireController::class, 'Question2'])->where('quick_choices', '[A-z\-]+')->name('questionnaire.pg2')->middleware('auth');
+Route::post('/questionnaire/results/{quick_choices:slug}', [QuestionnaireController::class, 'ResultProcess'])->where('quick_choices', '[A-z\-]+')->name('questionnaire.resultProcess')->middleware('auth');
+Route::get('/questionnaire/results/{quick_choices:slug}', [QuestionnaireController::class, 'Result'])->where('quick_choices', '[A-z\-]+')->name('questionnaire.result')->middleware('auth');
+
+
+// USER LOGIN DASHBOARD
+Route::get('/home', [HomeController::class, 'userHome'])->name('user.home')->middleware('auth');
+
+// USER DASHBOARD ACCOUNT SETTINGS
+Route::get('/home/settings', [ClientAccountController::class, 'list'])->name('client_user_account.list')->middleware('auth');
+Route::post('/home/settings/edit/{user:id}', [ClientAccountController::class, 'edit'])->where('user', '[0-9]+')->name('client_user_account.edit')->middleware('auth');
+Route::post('/home/settings/delete/{user:id}', [ClientAccountController::class, 'delete'])->where('user', '[0-9]+')->name('client_user_account.delete')->middleware('auth');
+Route::post('/home/settings/image/{user:id}', [ClientAccountController::class, 'image'])->where('user', '[0-9]+')->name('client_user_account.image')->middleware('auth');
+
+
+// USER STATISTICS
+Route::get('/home/statistics', [ClientAccountController::class, 'stats'])->name('client_user_account.stats')->middleware('auth');
+

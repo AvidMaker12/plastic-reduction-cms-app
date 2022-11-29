@@ -1,4 +1,4 @@
-<form method="post" action="<?= route('plastic_calculator_question.icon',[$multiple_choice->id])?>" novalidate class="form-horizontal" enctype="multipart/form-data">
+<form method="post" action="<?= route('plastic_calculator_question.iconChoice',[$multiple_choice->id])?>" novalidate class="form-horizontal" enctype="multipart/form-data">
     <?= csrf_field() ?>
     <div class="modal fade" id="modalIconChoice{{ $multiple_choice->id }}" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true" area-labelledby="modalIconChoiceTitle{{ $multiple_choice->id }}" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -11,8 +11,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-4">
-                        For Question <?= $question->id ?>:
-                        <br><?= $question->question ?>
+                        <label for="question_id" class="form-label">{{ __('Question:') }} <?= $question->question ?></label>
+                        <input type="text" name="question_id" id="question_id" value="<?= old('question_id', $question->id) ?>"  required class="form-control" aria-hidden="true" tabindex="-2">
+                        <?php if($errors->first('question_id')): ?>
+                            <br>
+                            <span class="text-danger"><?= $errors->first('question_id'); ?></span>
+                        <?php endif; ?>
+                        <div id="questionHelp" class="form-text">{{ __('Note: Above is question ID for reference only.') }}</div>
                     </div>
 
                     <div id="preview" style="display:none;" class="ms-4">

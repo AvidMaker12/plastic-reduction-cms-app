@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <form method="post" action="<?= route('plastic.image',[$plastic_product->id])?>)?>" novalidate class="form-horizontal" enctype="multipart/form-data">
+                <form method="post" action="<?= route('plastic.image',[$plastic_product->id])?>" novalidate class="form-horizontal" enctype="multipart/form-data">
 
                     <?= csrf_field() ?>
 

@@ -22,7 +22,7 @@
 
                         <p class="card-text">{{ __('Selection of website data categories available for editing') }}:</p>
 
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush me-3">
                             <li class="list-group-item list-group-item-action ms-2">
                                 <a href="<?= route('plastic.list') ?>" class="btn mt-2" role="button">{{ __('Plastic Products') }}</a>
                             </li>

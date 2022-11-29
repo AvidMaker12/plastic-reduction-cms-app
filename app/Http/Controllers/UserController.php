@@ -105,7 +105,7 @@ class UserController extends Controller
     {
         $attributes = request()->validate([
             // 'profile_image' => 'required|image',
-            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         if($user->profile_image){

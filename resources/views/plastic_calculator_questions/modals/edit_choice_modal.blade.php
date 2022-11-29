@@ -12,7 +12,7 @@
                 <div class="modal-body">
                     <div class="mb-4">
                         <label for="question_id" class="form-label">{{ __('Question:') }} <?= $question->question ?></label>
-                        <input type="text" name="question_id" id="question_id" value="<?= old('question_id', $question->id) ?>"  required class="form-control">
+                        <input type="text" name="question_id" id="question_id" value="<?= old('question_id', $question->id) ?>"  required class="form-control" aria-hidden="true" tabindex="-2">
                         <?php if($errors->first('question_id')): ?>
                             <br>
                             <span class="text-danger"><?= $errors->first('question_id'); ?></span>

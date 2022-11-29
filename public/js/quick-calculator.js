@@ -32,20 +32,21 @@ function pageLoad() {
         var score = 0; // User's total score, to be counted.
         var totalPoints = inputElements.length; // Total availabe points to score.
 
-
         //---FORM FILTER---
-        for (let i = 0; i < totalPoints; i++ ) {
+        for (let i = 0; i < inputElements.length; i++ ) {
     		// var check = document.getElementById(inputElements[i].id);
     		// console.log(check);
 
-            // ---SCORE SYSTEM---
+            //---SCORE SYSTEM---
             if (inputElements[i].checked) { // Count how many checkboxes have been checked, which becomes the score.
                 score += 1;
             }
-	    } // End of for loop.
-        
 
-        //---FORM VALIDATION---
+            //---TOTAL POINTS VALIDATION---
+            if (inputElements[i].id == "") { // Checks and removes <input> elements where id="" (ex. CSRF form validation hidden input has empty string for id).
+                totalPoints -= 1;
+            }
+	    } // End of for loop.
 
 
         //==== FORM SUBMISSION TASKS ====
@@ -53,17 +54,27 @@ function pageLoad() {
         //---LOCAL STORAGE---
         // LocalStorage: Create/store values:
         localStorage.setItem("quickResult", score); // Stores user's score from Quick Calculator results.
+        localStorage.setItem("totalPoints", totalPoints); // Stores total available points from page2 to calculate final score.
         
         // LocalStorage: create variables using stored values:
         var LS_quickResult = localStorage.getItem("quickResult"); // Local variable.
+        var LS_totalPoints = localStorage.getItem("totalPoints"); // Local variable.
         
         // LocalStorage: validation:
         if (!LS_quickResult){
             console.error("LocalStorage: quickResult is undefined/null.");
             console.error("LocalStorage: quickResult = " + LS_quickResult);
         } else {
-            console.log("LocalStorage: Question 1 input = " + LS_quickResult);
-            console.log("Variable 'score' = " + score);
+            console.log("LocalStorage: quickResult = " + LS_quickResult);
+            console.log("Score = " + score);
+        }
+
+        if (!LS_totalPoints){
+            console.error("LocalStorage: totalPoints is undefined/null.");
+            console.error("LocalStorage: totalPoints = " + LS_totalPoints);
+        } else {
+            console.log("LocalStorage: totalPoints = " + LS_totalPoints);
+            console.log("Score = " + score);
         }
 
         
@@ -71,6 +82,7 @@ function pageLoad() {
 
     // LocalStorage: Retrieve stored stored values:
     var LS_quickResult = localStorage.getItem("quickResult"); // This is useful for when navigating back to home page and ensuring user input data persist, if needed.
+    var LS_totalPoints = localStorage.getItem("totalPoints")
 
     // Function: Delete local storage values:
     // function localStorageDel() {

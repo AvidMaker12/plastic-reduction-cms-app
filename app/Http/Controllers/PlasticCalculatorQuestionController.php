@@ -162,7 +162,7 @@ class PlasticCalculatorQuestionController extends Controller
     public function icon(PlasticCalculatorQuestion $plastic_calculator_question)
     {
         $attributes = request()->validate([
-            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         if($plastic_calculator_question->icon){
@@ -177,22 +177,26 @@ class PlasticCalculatorQuestionController extends Controller
             ->with('message', 'Plastic Calculator Question icon has been saved.');
     }
 
-    public function iconChoice(PlasticCalculatorQuestion $plastic_calculator_question, PlasticCalculatorMultipleChoice $plastic_calculator_multiple_choice)
+    public function iconChoice(PlasticCalculatorQuestion $plastic_calculator_question, PlasticCalculatorMultipleChoice $multiple_choice)
     {
         $attributes = request()->validate([
-            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'question_id' => 'required',
         ]);
 
-        if($plastic_calculator_multiple_choice->icon){
-            Storage::delete($plastic_calculator_multiple_choice->icon); // Delete previously stored image, if any.
+        if($multiple_choice->icon){
+            Storage::delete($multiple_choice->icon); // Delete previously stored image, if any.
         }
 
         $path = request()->file('icon')->store('plastic_calculator_multiple_choices', 'public'); // Expected string output example: users/picture.jpg
-        $plastic_calculator_multiple_choice->icon = $path; // Expected string output example to be stored into DB: http://127.0.0.1:8000/storage/plastic_calculator_questions/picture.jpg
-        $plastic_calculator_multiple_choice->save();
+        $multiple_choice->icon = $path; // Expected string output example to be stored into DB: http://127.0.0.1:8000/storage/plastic_calculator_questions/picture.jpg
+        
+        $multiple_choice->plastic_calculator_question_id = $attributes['question_id'];
+        $multiple_choice->user_id = Auth::user()->id;
+        $multiple_choice->save();
         
         return redirect(route('plastic_calculator_question.list'))
-            ->with('message', 'Multiple Choice '.$plastic_calculator_multiple_choice->id.' icon for Question '.$attributes['plastic_calculator_question_id'].' has been saved.');
+            ->with('message', 'Multiple Choice '.$multiple_choice->id.' icon for Question '.$attributes['question_id'].' has been saved.');
     }
 
     public function imageForm(PlasticCalculatorQuestion $plastic_calculator_question)
@@ -205,7 +209,7 @@ class PlasticCalculatorQuestionController extends Controller
     public function image(PlasticCalculatorQuestion $plastic_calculator_question)
     {
         $attributes = request()->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         if($plastic_calculator_question->image){
