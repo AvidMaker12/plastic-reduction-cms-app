@@ -21,7 +21,7 @@
                         <?php if($quick_choice->icon): ?>
                             <img src="<?= asset('storage/'.$quick_choice->icon) ?>" height="25" alt="{{ __('Plastic calculator multiple choice icon') }}">
                         <?php endif; ?>
-                        <a href="<?= route('questionnaire.pg2',[$quick_choice->slug]) ?>" class="btn btn-success ms-3" role="button"><?= $quick_choice->icon ?> <?= $quick_choice->choice ?></a>
+                        <a href="<?= route('questionnaire.pg2',[$quick_choice->slug]) ?>" class="btn btn-success ms-3" role="button"><?= $quick_choice->choice ?></a>
                     </div>
                     <br><br>
                 <?php endif; ?>

@@ -29,7 +29,6 @@
                             <h3 class="h1 m-0 ms-3"><b><?= $quick_choice->choice ?></b></h2> <!-- Room category names for plastic products. Ex. Kitchen, Restroom, Office. -->
                         </div>
                         
-
                         <div class="row row-cols-3 row-cols-md-4 g-4 mb-5 d-flex justify-content-center"> <!-- This wraps around all cards to control their page layout. -->
                         <?php foreach($plastic_products as $plastic): ?>
                             <?php if($plastic->category == $quick_choice->choice): ?> <!-- If the category names match, then output respective plastic products. -->
