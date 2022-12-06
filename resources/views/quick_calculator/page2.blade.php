@@ -9,6 +9,7 @@
 
         <h1 class="h4 d-flex justify-content-center">{{ __('Plastic Waste Calculator') }}</h1>
         <br>
+        
         <?php foreach($quick_questions as $quick_question): ?>
             <?php if($quick_question->id == 2): ?>
                 <h2 class="h3 d-flex justify-content-center"><?= $quick_question->question ?></h2>
