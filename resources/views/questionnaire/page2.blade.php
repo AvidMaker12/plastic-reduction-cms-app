@@ -10,6 +10,7 @@
         <h1 class="h4 d-flex justify-content-center">{{ __('Plastic Reduction Questionnaire') }}</h1>
         <h3 class="h4 d-flex justify-content-center" id="scoreCategory" data-category="<?= $segmentURL ?>">{{ __('Category:') }} <?= $segmentURL ?></h1>
         <br>
+        
         <?php foreach($quick_questions as $quick_question): ?>
             <?php if($quick_question->id == 2): ?>
                 <h2 class="h3 d-flex justify-content-center"><?= $quick_question->question ?></h2>
