@@ -21,8 +21,7 @@
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
         "spatie/laravel-ignition": "^1.0",
-        "smottt/wideimage": "^1.1.4",
-        "dompdf/dompdf": "^1.2.0"
+        "smottt/wideimage": "^1.1.4"
     },
     "autoload": {
         "psr-4": {
@@ -62,7 +61,11 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true
-        }
+        },
+        "platform": {
+            "php": "8.0.7"
+        },
+        "platform-check": false
     },
     "minimum-stability": "dev",
     "prefer-stable": true
